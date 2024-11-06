@@ -1,3 +1,7 @@
+To install react: Install node.js, run npx create-react-app tts in cmd
+To open VSCode in a directory from cmd: navigate to directory, run "code ."
+If node_modules is missing: run "install npm", this will look at the package.json folder and install everything from the dependencies
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
