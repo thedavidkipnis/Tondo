@@ -1,13 +1,42 @@
-body {
+/* this makes the elements be flush with the borders */
+body, html { 
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.App {
+  text-align: center;
+}
+
+.Navbar {
+  background-color: lightgrey;
+  align-items: center;
+  text-align: right;
+  height: 5vh;
+  min-height: 50px;
+  padding: 0 0 0 0;
+}
+
+.NavbarButton {
+  background-color: white;
+  height: 50px;
+  width: 100px;
+  border-style: none;
+  margin: 0px 5px 0px 5px;
+  border-radius: 10px;
+}
+
+.NavbarButton:hover {
+  background-color: bisque;
+}
+
+.NavbarButton:active {
+  background-color: grey;
+}
+
+.Board {
+  text-align: center;
+  border: 1px;
+  /* border-color: red; */
+  /* border-style: solid; */
 }
