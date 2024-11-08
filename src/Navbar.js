@@ -1,22 +1,25 @@
+import { useState } from 'react'
+
 const Navbar = () => {
     return ( 
         <nav className="Navbar">
             <div className="links">
-                <NavbarButton buttonText={"Clear All"} buttonFunction={(e) => {handleClick('CA', e)}}/>
-                <NavbarButton buttonText={"New Note"} buttonFunction={(e) => {handleClick('NN', e)}}/>
+                <NavbarButton buttonText={"Clear All"}/>
+                <NavbarButton buttonText={"New Note"}/>
             </div>
         </nav>
      );
 }
 
 const NavbarButton = (props) => {
-    return (
-        <button className="NavbarButton" onClick={props.buttonFunction}>{props.buttonText}</button>
-    )
-}
 
-const handleClick = (buttonName, e) => {
-    console.log(buttonName)
+    const handleClick = () => {
+        console.log('--')
+    }
+
+    return (
+        <button className="NavbarButton" onClick={handleClick}>{props.buttonText}</button>
+    )
 }
  
 export default Navbar;

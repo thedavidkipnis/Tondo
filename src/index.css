@@ -35,8 +35,19 @@ body, html {
 }
 
 .Board {
-  text-align: center;
   border: 1px;
+  display: flex;
+  align-items: center;
+  align-content: center;
   /* border-color: red; */
   /* border-style: solid; */
+}
+
+.BoardNote {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  background-color: lightgray;
+  height: 50px;
+  width: 50px;
 }
