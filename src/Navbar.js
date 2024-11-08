@@ -1,11 +1,13 @@
 import { useState } from 'react'
+import Board from './Board'
 
-const Navbar = () => {
+const Navbar = (props) => {
+
     return ( 
         <nav className="Navbar">
             <div className="links">
-                <NavbarButton buttonText={"Clear All"}/>
-                <NavbarButton buttonText={"New Note"}/>
+                <NavbarButton buttonText={"Clear All"} buttonFunction={props.navbarClearAll}/>
+                <NavbarButton buttonText={"New Note"} buttonFunction={props.navbarAddNote}/>
             </div>
         </nav>
      );
@@ -13,12 +15,8 @@ const Navbar = () => {
 
 const NavbarButton = (props) => {
 
-    const handleClick = () => {
-        console.log('--')
-    }
-
     return (
-        <button className="NavbarButton" onClick={handleClick}>{props.buttonText}</button>
+        <button className="NavbarButton" onClick={props.buttonFunction}>{props.buttonText}</button>
     )
 }
  

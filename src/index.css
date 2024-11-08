@@ -49,5 +49,10 @@ body, html {
   align-items: center;
   background-color: lightgray;
   height: 50px;
+  border-radius: 5px;
   width: 50px;
+}
+
+.BoardNote:hover {
+  background-color: aliceblue;
 }
