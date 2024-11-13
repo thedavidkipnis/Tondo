@@ -18,20 +18,34 @@ Core functionality:
 function App() {
 
   const [notes, setNotes] = useState([])
+  const [isHoveringAnotherNote, setIsHoveringElement] = useState(false)
 
-  const addNote = () => {
+  const addNote = (pageX, pageY) => {
     let nextId = notes.length + 1
-    const newNote = <BoardNote noteId={nextId} noteText={'Note ' + nextId.toString()}/>
+    const newNote = <BoardNote noteId={nextId} 
+          noteText={'Note ' + nextId.toString()}
+          notePageX={pageX}
+          notePageY={pageY}
+          isBeingHovered={setIsHoveringElement}
+          />
     setNotes([...notes, newNote])
   }
 
   const clearAllNotes = () => {
-    console.log('click') 
       setNotes([]);
   }
 
+  const addNoteWithClick = ({pageX, pageY}) => {
+    if(!isHoveringAnotherNote) {
+      if(pageY > 100) {
+        addNote(pageX, pageY)
+      }
+    }
+  }
+
   return (
-    <div className="App">
+    
+    <div className="App" onClick={addNoteWithClick}>
       <Navbar navbarAddNote={addNote} navbarClearAll={clearAllNotes}></Navbar>
       <Board notes={notes}></Board>
     </div>
