@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/static/css/main.7947e94d.css",
-    "main.js": "/static/js/main.25ad6da7.js",
-    "index.html": "/index.html",
-    "main.7947e94d.css.map": "/static/css/main.7947e94d.css.map",
-    "main.25ad6da7.js.map": "/static/js/main.25ad6da7.js.map"
+    "main.css": "/thedavidkipnis.github.io/Tondo/static/css/main.7947e94d.css",
+    "main.js": "/thedavidkipnis.github.io/Tondo/static/js/main.25ad6da7.js",
+    "index.html": "/thedavidkipnis.github.io/Tondo/index.html",
+    "main.7947e94d.css.map": "/thedavidkipnis.github.io/Tondo/static/css/main.7947e94d.css.map",
+    "main.25ad6da7.js.map": "/thedavidkipnis.github.io/Tondo/static/js/main.25ad6da7.js.map"
   },
   "entrypoints": [
     "static/css/main.7947e94d.css",
