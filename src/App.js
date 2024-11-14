@@ -1,7 +1,7 @@
 import Navbar from './Navbar'
 import BoardNote from "./BoardNote"
 import Board from './Board'
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 /*
 To install react: Install node.js, run npx create-react-app tts in cmd
@@ -12,18 +12,26 @@ Core functionality:
 - add a sticky (either by clicking on screen or + button on nav bar)
 - erase all (nav bar) (with confirmation, i.e. "are you sure you want to delete all your notes?")
 
+- current Postgres + React tutorial
+- https://blog.logrocket.com/getting-started-postgres-react-app/
 */
 
+function genUID() {
+  return Date.now().toString(36) + Math.random().toString(36).substr(2)
+}
 
 function App() {
 
   const [notes, setNotes] = useState([])
   const [isHoveringAnotherNote, setIsHoveringElement] = useState(false)
 
+  const [data, setData] = useState([])
+
   const addNote = (pageX, pageY) => {
-    let nextId = notes.length + 1
-    const newNote = <BoardNote noteId={nextId} 
-          noteText={'Note ' + nextId.toString()}
+    let newID = genUID()
+    const newNote = <BoardNote 
+          noteId={newID} 
+          noteText={newID.toString()}
           notePageX={pageX}
           notePageY={pageY}
           isBeingHovered={setIsHoveringElement}
@@ -43,10 +51,23 @@ function App() {
     }
   }
 
+  useEffect(() => {
+    fetch('http://localhost:5000/api/data')
+      .then((response) => response.json())
+      .then((data) => setData(data))
+      .catch((error) => console.error(error));
+      console.log(data);
+  }, []);
+
   return (
     
     <div className="App" onClick={addNoteWithClick}>
       <Navbar navbarAddNote={addNote} navbarClearAll={clearAllNotes}></Navbar>
+      <ul>
+        {data.map((item, index) => (
+          <li key={index}>{item.id}</li>
+        ))}
+      </ul>
       <Board notes={notes}></Board>
     </div>
   );

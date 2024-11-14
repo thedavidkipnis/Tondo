@@ -13,8 +13,7 @@ const BoardNote = (props) => {
                 onMouseEnter={() => props.isBeingHovered(true)}
                 onMouseLeave={() => props.isBeingHovered(false)}
                 >
-            {/* {text} */}
-            <input type="text" />
+            <textarea type="text" className="BoardNoteTextBox"/>
         </div>
     );
 
