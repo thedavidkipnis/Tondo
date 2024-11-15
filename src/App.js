@@ -22,10 +22,32 @@ function genUID() {
 
 function App() {
 
+  const [data, setData] = useState([])
   const [notes, setNotes] = useState([])
+
   const [isHoveringAnotherNote, setIsHoveringElement] = useState(false)
 
-  const [data, setData] = useState([])
+  useEffect(() => {
+    fetch('http://localhost:5000/api/data')
+      .then((response) => response.json())
+      .then((data) => processDBData(data))
+      .catch((error) => console.error(error));
+  }, []);
+
+  function processDBData(dbdata) {
+    let new_arr = []
+      dbdata.forEach(d => {
+        const newNote = <BoardNote 
+            noteId={d.id} 
+            noteText={d.text}
+            notePageX={d.posx}
+            notePageY={d.posy}
+            isBeingHovered={setIsHoveringElement}
+            />
+          new_arr.push(newNote)
+        })
+    setNotes(new_arr)
+  }
 
   const addNote = (pageX, pageY) => {
     let newID = genUID()
@@ -50,14 +72,6 @@ function App() {
       }
     }
   }
-
-  useEffect(() => {
-    fetch('http://localhost:5000/api/data')
-      .then((response) => response.json())
-      .then((data) => setData(data))
-      .catch((error) => console.error(error));
-      console.log(data);
-  }, []);
 
   return (
     
