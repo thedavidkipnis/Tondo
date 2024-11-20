@@ -16,6 +16,15 @@ Core functionality:
 - https://blog.logrocket.com/getting-started-postgres-react-app/
 */
 
+
+/* HOW TO DELETE NOTE: create a useState variable here in App.js, something like toDelete
+pass each new note the useState function, and have the note use the function like so:
+setToDelete(noteID)
+
+This way App will know which ID needs to be removed, and can then update the list and remove the note
+with the particular ID
+*/
+
 function genUID() {
   return Date.now().toString(36) + Math.random().toString(36).substr(2)
 }
@@ -26,13 +35,27 @@ function App() {
   const [notes, setNotes] = useState([])
 
   const [isHoveringAnotherNote, setIsHoveringElement] = useState(false)
+  const [noteIDToDelete, setIDToBeDeleted] = useState(null)
 
-  useEffect(() => {
-    fetch('http://localhost:5000/api/data')
-      .then((response) => response.json())
-      .then((data) => processDBData(data))
-      .catch((error) => console.error(error));
-  }, []);
+  // useEffect(() => {
+  //   fetch('http://localhost:5000/api/data')
+  //     .then((response) => response.json())
+  //     .then((data) => processDBData(data))
+  //     .catch((error) => console.error(error));
+  // }, []);
+
+  useEffect(() => { // TODO: refactor to use a dict/obj instead of array for notes
+    if(noteIDToDelete !== null) {
+      for(let i = 0; i < notes.length; i++) {
+        if(notes[i].props.noteId == noteIDToDelete) {
+          delete notes[i]
+          setNotes(notes)
+          setIDToBeDeleted(null)
+          break
+        }
+      }
+    }
+  }, [noteIDToDelete])
 
   function processDBData(dbdata) {
     let new_arr = []
@@ -43,6 +66,7 @@ function App() {
             notePageX={d.posx}
             notePageY={d.posy}
             isBeingHovered={setIsHoveringElement}
+            setIDToBeDeleted={setIDToBeDeleted}
             />
           new_arr.push(newNote)
         })
@@ -57,6 +81,7 @@ function App() {
           notePageX={pageX}
           notePageY={pageY}
           isBeingHovered={setIsHoveringElement}
+          setIDToBeDeleted={setIDToBeDeleted}
           />
     setNotes([...notes, newNote])
   }

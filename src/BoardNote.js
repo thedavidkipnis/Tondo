@@ -12,6 +12,7 @@ const BoardNote = (props) => {
                 key={id} style={st} 
                 onMouseEnter={() => props.isBeingHovered(true)}
                 onMouseLeave={() => props.isBeingHovered(false)}
+                onClick={() => props.setIDToBeDeleted(id)}
                 >
             <textarea type="text" className="BoardNoteTextBox"/>
         </div>
