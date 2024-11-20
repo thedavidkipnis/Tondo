@@ -45,14 +45,12 @@ function App() {
   // }, []);
 
   useEffect(() => { // TODO: refactor to use a dict/obj instead of array for notes
-    if(noteIDToDelete !== null) {
-      for(let i = 0; i < notes.length; i++) {
-        if(notes[i].props.noteId == noteIDToDelete) {
-          delete notes[i]
-          setNotes(notes)
-          setIDToBeDeleted(null)
-          break
-        }
+    for(let i = 0; i < notes.length; i++) {
+      if(notes[i] !== undefined && notes[i].props.noteId == noteIDToDelete) {
+        let new_arr = notes
+        delete new_arr[i]
+        setNotes(new_arr)
+        break
       }
     }
   }, [noteIDToDelete])
