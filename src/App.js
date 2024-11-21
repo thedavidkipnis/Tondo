@@ -16,15 +16,6 @@ Core functionality:
 - https://blog.logrocket.com/getting-started-postgres-react-app/
 */
 
-
-/* HOW TO DELETE NOTE: create a useState variable here in App.js, something like toDelete
-pass each new note the useState function, and have the note use the function like so:
-setToDelete(noteID)
-
-This way App will know which ID needs to be removed, and can then update the list and remove the note
-with the particular ID
-*/
-
 function genUID() {
   return Date.now().toString(36) + Math.random().toString(36).substr(2)
 }
