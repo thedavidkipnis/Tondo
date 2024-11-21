@@ -50,6 +50,7 @@ function App() {
         let new_arr = notes
         delete new_arr[i]
         setNotes(new_arr)
+        setIsHoveringElement(false)
         break
       }
     }
