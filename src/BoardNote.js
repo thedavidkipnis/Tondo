@@ -19,7 +19,7 @@ const BoardNote = (props) => {
                     onClick={() => props.setIDToBeDeleted(id)}>X</div>
             </div>
             
-            <textarea type="text" className="BoardNoteTextBox"/>
+            <textarea type="text" className="BoardNoteTextBox" placeholder="Todo..."/>
         </div>
     );
 
