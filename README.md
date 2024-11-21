@@ -4,8 +4,8 @@ I tend to always have about a billion random things that I need to remember to d
 
 Backend uses PostreSQL DB + Express 
 
-Current usage:
-- Open two separate terminals
-- In term1, run node backend/server.js to start the server
-- In term2, run npm run start to start the app
+This is a WIP! To use in current state:
+- Clone https://github.com/thedavidkipnis/Tondo.git
+- Open cmd, and cd into the repo you cloned to
+- Run 'npm run start' - the project will open in a local browser
 
