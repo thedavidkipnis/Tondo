@@ -10,7 +10,7 @@ body, html {
 }
 
 .Navbar {
-  background-color: lightgrey;
+  background-color: rgb(138, 132, 255);
   align-items: center;
   text-align: right;
   height: 5vh;
@@ -19,6 +19,7 @@ body, html {
 }
 
 .NavbarButton {
+  color: rgb(138, 132, 255);
   background-color: white;
   height: 50px;
   width: 100px;
@@ -29,14 +30,20 @@ body, html {
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
+  cursor: pointer;
+
+  transition: 0.2s
 }
 
 .NavbarButton:hover {
   background-color: bisque;
+  transition: .2s;
 }
 
 .NavbarButton:active {
-  background-color: grey;
+  color: rgb(138, 132, 255);
+  background-color: rgb(200, 197, 255);
+  transition: .05s;
 }
 
 .Board {
@@ -52,7 +59,7 @@ body, html {
   text-align: center;
   vertical-align: middle;
   align-items: center;
-  background-color: rgb(157, 157, 157);
+  background-color: rgb(200, 197, 255);
   border-radius: 5px 0px 5px 5px;
   border: 2px;
   border-style: solid;
@@ -73,10 +80,12 @@ body, html {
   text-align: right;
   right: 0;
   width: 10px;
+  transition: .2s;
 }
 
 .BoardNoteCloseMarker:hover {
-  color: black;
+  color: rgb(138, 132, 255);
+  transition: .2s;
 }
 
 .BoardNoteTextBox {
