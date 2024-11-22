@@ -16,6 +16,12 @@ Core functionality:
 - https://blog.logrocket.com/getting-started-postgres-react-app/
 */
 
+/*
+Current bug: when switching to using obj/dict instead of array for Notes, when creating notes in order,
+if all notes have text, deleting the first note that was created deletes all the text for the notes that
+were created after it
+*/
+
 function genUID() {
   return Date.now().toString(36) + Math.random().toString(36).substr(2)
 }
