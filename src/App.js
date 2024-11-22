@@ -24,10 +24,13 @@ function App() {
 
   const [data, setData] = useState([])
   const [notes, setNotes] = useState([])
+  const [notesObj, setNotesObj] = useState({})
 
-  const [isHoveringAnotherNote, setIsHoveringElement] = useState(false)
+  const [isHoveringNavBar, setIsHoveringNavbar] = useState(false)
+  const [isHoveringAnotherNote, setIsHoveringNote] = useState(false)
   const [noteIDToDelete, setIDToBeDeleted] = useState(null)
 
+//#region db stuff
   // useEffect(() => {
   //   fetch('http://localhost:5000/api/data')
   //     .then((response) => response.json())
@@ -35,32 +38,27 @@ function App() {
   //     .catch((error) => console.error(error));
   // }, []);
 
-  useEffect(() => { // TODO: refactor to use a dict/obj instead of array for notes
-    for(let i = 0; i < notes.length; i++) {
-      if(notes[i] !== undefined && notes[i].props.noteId == noteIDToDelete) {
-        let new_arr = notes
-        delete new_arr[i]
-        setNotes(new_arr)
-        setIsHoveringElement(false)
-        break
-      }
-    }
-  }, [noteIDToDelete])
+    // function processDBData(dbdata) {
+  //   let new_arr = []
+  //     dbdata.forEach(d => {
+  //       const newNote = <BoardNote 
+  //           noteId={d.id} 
+  //           noteText={d.text}
+  //           notePageX={d.posx}
+  //           notePageY={d.posy}
+  //           isBeingHovered={setIsHoveringNote}
+  //           setIDToBeDeleted={setIDToBeDeleted}
+  //           />
+  //         new_arr.push(newNote)
+  //       })
+  //   setNotes(new_arr)
+  // }
+//#endregion
 
-  function processDBData(dbdata) {
-    let new_arr = []
-      dbdata.forEach(d => {
-        const newNote = <BoardNote 
-            noteId={d.id} 
-            noteText={d.text}
-            notePageX={d.posx}
-            notePageY={d.posy}
-            isBeingHovered={setIsHoveringElement}
-            setIDToBeDeleted={setIDToBeDeleted}
-            />
-          new_arr.push(newNote)
-        })
-    setNotes(new_arr)
+  const addNoteWithClick = ({pageX, pageY}) => {
+    if(!isHoveringAnotherNote && !isHoveringNavBar) {
+      addNote(pageX, pageY)
+    }
   }
 
   const addNote = (pageX, pageY) => {
@@ -70,33 +68,39 @@ function App() {
           noteText={newID.toString()}
           notePageX={pageX}
           notePageY={pageY}
-          isBeingHovered={setIsHoveringElement}
+          isBeingHovered={setIsHoveringNote}
           setIDToBeDeleted={setIDToBeDeleted}
           />
     setNotes([...notes, newNote])
+    notesObj[newID] = newNote
+    setNotesObj(notesObj)
   }
+
+  useEffect(() => {
+    if(noteIDToDelete in notesObj) {
+      delete notesObj[noteIDToDelete]
+      setNotesObj(notesObj)
+    }
+    for(let i = 0; i < notes.length; i++) {
+      if(notes[i] !== undefined && notes[i].props.noteId == noteIDToDelete) {
+        let new_arr = notes
+        delete new_arr[i]
+        setNotes(new_arr)
+        setIsHoveringNote(false)
+        break
+      }
+    }
+  }, [noteIDToDelete])
 
   const clearAllNotes = () => {
       setNotes([]);
-  }
-
-  const addNoteWithClick = ({pageX, pageY}) => {
-    if(!isHoveringAnotherNote) {
-      if(pageY > 100) {
-        addNote(pageX, pageY)
-      }
-    }
+      setNotesObj({})
   }
 
   return (
     
     <div className="App" onClick={addNoteWithClick}>
-      <Navbar navbarAddNote={addNote} navbarClearAll={clearAllNotes}></Navbar>
-      <ul>
-        {data.map((item, index) => (
-          <li key={index}>{item.id}</li>
-        ))}
-      </ul>
+      <Navbar navbarAddNote={addNote} navbarClearAll={clearAllNotes} isBeingHovered={setIsHoveringNavbar}></Navbar>
       <Board notes={notes}></Board>
     </div>
   );

@@ -6,9 +6,8 @@ const Board = (props) => {
     return ( 
         <div>
             <div className="Board">
-                {props.notes.map(note => (
-                    note
-                ))}
+                {/* {Object.values(props.notes).map(note => (note))} */}
+                {props.notes.map(note => (note))}
             </div>
         </div>
      );

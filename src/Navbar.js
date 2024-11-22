@@ -4,7 +4,7 @@ import Board from './Board'
 const Navbar = (props) => {
 
     return ( 
-        <nav className="Navbar">
+        <nav className="Navbar" onMouseEnter={() => props.isBeingHovered(true)} onMouseLeave={() => props.isBeingHovered(false)}>
             <div className="links">
                 <NavbarButton buttonText={"Clear All"} buttonFunction={props.navbarClearAll}/>
                 <NavbarButton buttonText={"New Note"} buttonFunction={props.navbarAddNote}/>
