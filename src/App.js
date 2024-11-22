@@ -69,17 +69,18 @@ function App() {
 
   const addNote = (pageX, pageY) => {
     let newID = genUID()
+    const newNoteAttributes = {
+      noteId: newID, pageX: pageX, pageY: pageY, isBeingHovered: setIsHoveringNote, setIDToBeDeleted: setIDToBeDeleted
+    }
     const newNote = <BoardNote 
           noteId={newID} 
-          noteText={newID.toString()}
           notePageX={pageX}
           notePageY={pageY}
           isBeingHovered={setIsHoveringNote}
           setIDToBeDeleted={setIDToBeDeleted}
           />
     setNotes([...notes, newNote])
-    notesObj[newID] = newNote
-    setNotesObj(notesObj)
+    setNotesObj({...notesObj, [newID]: newNoteAttributes})
   }
 
   useEffect(() => {
