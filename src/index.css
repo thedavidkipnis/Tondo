@@ -10,21 +10,37 @@ body, html {
 }
 
 .Navbar {
+  display: flex;
   background-color: rgb(138, 132, 255);
   align-items: center;
-  text-align: right;
-  height: 5vh;
+  height: 6vh;
   min-height: 50px;
   padding: 0 0 0 0;
+}
+
+.NavbarLeftHalfButtons {
+  /* border-color: greenyellow;
+  border-style: solid; */
+  height: 100%;
+  width: 50%;
+  text-align: left;
+}
+
+.NavbarRightHalfButtons {
+  /* border-color: red;
+  border-style: solid; */
+  height: 100%;
+  width: 50%;
+  text-align: right;
 }
 
 .NavbarButton {
   color: rgb(138, 132, 255);
   background-color: white;
-  height: 50px;
+  height: 40px;
   width: 100px;
   border-style: none;
-  margin: 0px 5px 0px 5px;
+  margin: 5px 5px 5px 5px;
   border-radius: 10px;
 
   -webkit-user-select: none; /* Safari */
@@ -32,16 +48,19 @@ body, html {
   user-select: none; /* Standard syntax */
   cursor: pointer;
 
+  outline: none;
+
   transition: 0.2s
 }
 
 .NavbarButton:hover {
-  background-color: bisque;
+  background-color: rgb(69, 62, 197);
+  color: white;
   transition: .2s;
 }
 
 .NavbarButton:active {
-  color: rgb(138, 132, 255);
+  color: white;
   background-color: rgb(200, 197, 255);
   transition: .05s;
 }
@@ -64,7 +83,7 @@ body, html {
   border: 2px;
   border-style: solid;
   border-color: white;
-  width: 100px;
+  width: 150px;
   height: 100px;
   position: absolute;
   padding: 0 0 0 0;

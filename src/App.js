@@ -22,8 +22,15 @@ if all notes have text, deleting the first note that was created deletes all the
 were created after it
 */
 
-function genUID() {
+const windowCenterX = (window.innerWidth/2) - 75
+const windowCenterY = (window.innerHeight/2) - 50
+
+function genRandomNoteUID() {
   return Date.now().toString(36) + Math.random().toString(36).substr(2)
+}
+
+function getRandomIntInRange(min, max) {
+  return Math.random() * (max - min) + min;
 }
 
 function App() {
@@ -67,7 +74,7 @@ function App() {
   }
 
   const addNote = (pageX, pageY) => {
-    let newID = genUID()
+    let newID = genRandomNoteUID()
     const newNote = <BoardNote 
           noteId={newID} 
           notePageX={pageX}
@@ -97,7 +104,10 @@ function App() {
   return (
     
     <div className="App" onClick={addNoteWithClick}>
-      <Navbar navbarAddNote={addNote} navbarClearAll={clearAllNotes} isBeingHovered={setIsHoveringNavbar}></Navbar>
+      <Navbar 
+        navbarAddNote={() => addNote(windowCenterX + getRandomIntInRange(-50,50),windowCenterY + getRandomIntInRange(-50,50))} 
+        navbarClearAll={clearAllNotes} 
+        isBeingHovered={setIsHoveringNavbar}/>
       <Board notes={notes}></Board>
     </div>
   );

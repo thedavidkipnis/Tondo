@@ -5,7 +5,10 @@ const Navbar = (props) => {
 
     return ( 
         <nav className="Navbar" onMouseEnter={() => props.isBeingHovered(true)} onMouseLeave={() => props.isBeingHovered(false)}>
-            <div className="links">
+            <div className="NavbarLeftHalfButtons">
+                <NavbarButton buttonText={"Settings"} buttonFunction={null}/>
+            </div>
+            <div className="NavbarRightHalfButtons">
                 <NavbarButton buttonText={"Clear All"} buttonFunction={props.navbarClearAll}/>
                 <NavbarButton buttonText={"New Note"} buttonFunction={props.navbarAddNote}/>
             </div>
