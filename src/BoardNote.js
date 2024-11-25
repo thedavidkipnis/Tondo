@@ -1,4 +1,5 @@
 import { useState } from "react"
+import Draggable from 'react-draggable'
 
 const BoardNote = (props) => {
 
@@ -14,6 +15,7 @@ const BoardNote = (props) => {
       }
 
     return (
+        <Draggable>
         <div className="BoardNote" 
                 key={id} style={st} 
                 onMouseEnter={() => props.isBeingHovered(true)}
@@ -34,6 +36,7 @@ const BoardNote = (props) => {
                 autoFocus 
             />
         </div>
+        </Draggable>
     );
 
 
