@@ -30,7 +30,6 @@ function App() {
 
   const [data, setData] = useState([])
   const [notes, setNotes] = useState([])
-  const [notesObj, setNotesObj] = useState({})
 
   const [isHoveringNavBar, setIsHoveringNavbar] = useState(false)
   const [isHoveringAnotherNote, setIsHoveringNote] = useState(false)
@@ -69,9 +68,6 @@ function App() {
 
   const addNote = (pageX, pageY) => {
     let newID = genUID()
-    const newNoteAttributes = {
-      noteId: newID, pageX: pageX, pageY: pageY, isBeingHovered: setIsHoveringNote, setIDToBeDeleted: setIDToBeDeleted
-    }
     const newNote = <BoardNote 
           noteId={newID} 
           notePageX={pageX}
@@ -80,14 +76,9 @@ function App() {
           setIDToBeDeleted={setIDToBeDeleted}
           />
     setNotes([...notes, newNote])
-    setNotesObj({...notesObj, [newID]: newNoteAttributes})
   }
 
   useEffect(() => {
-    if(noteIDToDelete in notesObj) {
-      delete notesObj[noteIDToDelete]
-      setNotesObj(notesObj)
-    }
     for(let i = 0; i < notes.length; i++) {
       if(notes[i] !== undefined && notes[i].props.noteId == noteIDToDelete) {
         let new_arr = notes
@@ -101,7 +92,6 @@ function App() {
 
   const clearAllNotes = () => {
       setNotes([]);
-      setNotesObj({})
   }
 
   return (
