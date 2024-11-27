@@ -1,20 +1,11 @@
-import { useState } from "react"
-import BoardNote from "./BoardNote"
+import InstructionText from "./InstructionText";
 
 const Board = (props) => {
     return ( 
         <div>
             <div className="Board">
+                <InstructionText text={"Click anywhere to add note..."} toggle={props.notes.length}/>
                 {props.notes.map(note => (note))}
-                {/* {Object.keys(props.notes).map((key) => 
-                    <BoardNote 
-                        noteId={props.notes[key].noteId}
-                        notePageX={props.notes[key].pageX}
-                        notePageY={props.notes[key].pageY}
-                        isBeingHovered={props.notes[key].isBeingHovered}
-                        setIDToBeDeleted={props.notes[key].setIDToBeDeleted}
-                    />
-                )} */}
             </div>
         </div>
      );

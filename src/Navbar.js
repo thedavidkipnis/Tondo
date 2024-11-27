@@ -6,7 +6,7 @@ const Navbar = (props) => {
     return ( 
         <nav className="Navbar" onMouseEnter={() => props.isBeingHovered(true)} onMouseLeave={() => props.isBeingHovered(false)}>
             <div className="NavbarLeftHalfButtons">
-                <NavbarButton buttonText={"Settings"} buttonFunction={null}/>
+                {/* <NavbarButton buttonText={"Settings"} buttonFunction={props.toggleSettingsVisible}/> */}
             </div>
             <div className="NavbarRightHalfButtons">
                 <NavbarButton buttonText={"Clear All"} buttonFunction={props.navbarClearAll}/>

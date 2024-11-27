@@ -1,11 +1,12 @@
 import { useState } from "react"
 import Draggable from 'react-draggable'
+import InstructionText from "./InstructionText"
 
 const BoardNote = (props) => {
 
     const id = props.noteId
-    const locationX = props.notePageX - 20
-    const locationY = props.notePageY * 1.9
+    const locationX = props.notePageX - 75
+    const locationY = props.notePageY - 80
     const st = {marginLeft:locationX, marginTop:locationY}
 
     const [noteText, setNoteText] = useState('')

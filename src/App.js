@@ -1,6 +1,8 @@
 import Navbar from './Navbar'
 import BoardNote from "./BoardNote"
 import Board from './Board'
+import SettingsWindow from './SettingsWindow'
+import InstructionText from './InstructionText'
 import { useEffect, useState } from "react"
 
 /*
@@ -42,6 +44,8 @@ function App() {
   const [isHoveringAnotherNote, setIsHoveringNote] = useState(false)
   const [noteIDToDelete, setIDToBeDeleted] = useState(null)
 
+  const [settingsWindowVisible, setSettingsVisibility] = useState(false)
+
 //#region db stuff
   // useEffect(() => {
   //   fetch('http://localhost:5000/api/data')
@@ -68,7 +72,7 @@ function App() {
 //#endregion
 
   const addNoteWithClick = ({pageX, pageY}) => {
-    if(!isHoveringAnotherNote && !isHoveringNavBar) {
+    if(!isHoveringAnotherNote && !isHoveringNavBar && !settingsWindowVisible) {
       addNote(pageX, pageY)
     }
   }
@@ -89,9 +93,10 @@ function App() {
     for(let i = 0; i < notes.length; i++) {
       if(notes[i] !== undefined && notes[i].props.noteId == noteIDToDelete) {
         let new_arr = notes
-        delete new_arr[i]
+        new_arr.splice(i,1)
         setNotes(new_arr)
         setIsHoveringNote(false)
+        console.log(notes)
         break
       }
     }
@@ -101,14 +106,21 @@ function App() {
       setNotes([]);
   }
 
+  const toggleSettingsVisible = () => {
+    setSettingsVisibility(!settingsWindowVisible)
+  }
+
   return (
     
     <div className="App" onClick={addNoteWithClick}>
       <Navbar 
         navbarAddNote={() => addNote(windowCenterX + getRandomIntInRange(-50,50),windowCenterY + getRandomIntInRange(-50,50))} 
         navbarClearAll={clearAllNotes} 
-        isBeingHovered={setIsHoveringNavbar}/>
-      <Board notes={notes}></Board>
+        isBeingHovered={setIsHoveringNavbar}
+        toggleSettingsVisible={toggleSettingsVisible}
+        areSettingsVisible={settingsWindowVisible}/>
+      <Board notes={notes}/>
+      <SettingsWindow isVisible={settingsWindowVisible} toggleVisible = {toggleSettingsVisible}/>
     </div>
   );
 }

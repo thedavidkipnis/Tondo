@@ -65,13 +65,20 @@ body, html {
   transition: .05s;
 }
 
+.SettingsWindowContainer {
+  position: absolute;
+  z-index: 99999;
+  left: 0px;
+  top: 0px;
+  width: 25vw;
+  height: 100%;
+  background-color: rgb(200, 197, 255);
+}
+
 .Board {
-  border: 1px;
-  display: flex;
   align-items: center;
   align-content: center;
-  /* border-color: red; */
-  /* border-style: solid; */
+  text-align: center;
 }
 
 .BoardNote {
@@ -116,4 +123,8 @@ body, html {
   border: none;
   outline: none;
   color: white;
+}
+
+.InstructionText {
+  color: rgb(200, 197, 255);
 }
