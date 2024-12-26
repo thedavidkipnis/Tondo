@@ -24,6 +24,10 @@ if all notes have text, deleting the first note that was created deletes all the
 were created after it
 */
 
+/* 
+TODO: draggable needs to be fixed
+3 notes a,b, and c are created in that order. C gets dragged somewhere. If a or b get deleted, c gets moved back to the original spot where it was created
+*/
 const windowCenterX = (window.innerWidth/2) - 75
 const windowCenterY = (window.innerHeight/2) - 50
 
