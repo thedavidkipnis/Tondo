@@ -1,6 +1,8 @@
 import Navbar from './Navbar'
 import BoardNote from "./BoardNote"
 import Board from './Board'
+import SettingsWindow from './SettingsWindow'
+import InstructionText from './InstructionText'
 import { useEffect, useState } from "react"
 
 /*
@@ -16,8 +18,25 @@ Core functionality:
 - https://blog.logrocket.com/getting-started-postgres-react-app/
 */
 
-function genUID() {
+/*
+Current bug: when switching to using obj/dict instead of array for Notes, when creating notes in order,
+if all notes have text, deleting the first note that was created deletes all the text for the notes that
+were created after it
+*/
+
+/* 
+TODO: draggable needs to be fixed
+3 notes a,b, and c are created in that order. C gets dragged somewhere. If a or b get deleted, c gets moved back to the original spot where it was created
+*/
+const windowCenterX = (window.innerWidth/2) - 75
+const windowCenterY = (window.innerHeight/2) - 50
+
+function genRandomNoteUID() {
   return Date.now().toString(36) + Math.random().toString(36).substr(2)
+}
+
+function getRandomIntInRange(min, max) {
+  return Math.random() * (max - min) + min;
 }
 
 function App() {
@@ -25,64 +44,87 @@ function App() {
   const [data, setData] = useState([])
   const [notes, setNotes] = useState([])
 
-  const [isHoveringAnotherNote, setIsHoveringElement] = useState(false)
+  const [isHoveringNavBar, setIsHoveringNavbar] = useState(false)
+  const [isHoveringAnotherNote, setIsHoveringNote] = useState(false)
+  const [noteIDToDelete, setIDToBeDeleted] = useState(null)
 
-  useEffect(() => {
-    fetch('http://localhost:5000/api/data')
-      .then((response) => response.json())
-      .then((data) => processDBData(data))
-      .catch((error) => console.error(error));
-  }, []);
+  const [settingsWindowVisible, setSettingsVisibility] = useState(false)
 
-  function processDBData(dbdata) {
-    let new_arr = []
-      dbdata.forEach(d => {
-        const newNote = <BoardNote 
-            noteId={d.id} 
-            noteText={d.text}
-            notePageX={d.posx}
-            notePageY={d.posy}
-            isBeingHovered={setIsHoveringElement}
-            />
-          new_arr.push(newNote)
-        })
-    setNotes(new_arr)
+//#region db stuff
+  // useEffect(() => {
+  //   fetch('http://localhost:5000/api/data')
+  //     .then((response) => response.json())
+  //     .then((data) => processDBData(data))
+  //     .catch((error) => console.error(error));
+  // }, []);
+
+    // function processDBData(dbdata) {
+  //   let new_arr = []
+  //     dbdata.forEach(d => {
+  //       const newNote = <BoardNote 
+  //           noteId={d.id} 
+  //           noteText={d.text}
+  //           notePageX={d.posx}
+  //           notePageY={d.posy}
+  //           isBeingHovered={setIsHoveringNote}
+  //           setIDToBeDeleted={setIDToBeDeleted}
+  //           />
+  //         new_arr.push(newNote)
+  //       })
+  //   setNotes(new_arr)
+  // }
+//#endregion
+
+  const addNoteWithClick = ({pageX, pageY}) => {
+    if(!isHoveringAnotherNote && !isHoveringNavBar && !settingsWindowVisible) {
+      addNote(pageX, pageY)
+    }
   }
 
   const addNote = (pageX, pageY) => {
-    let newID = genUID()
+    let newID = genRandomNoteUID()
     const newNote = <BoardNote 
           noteId={newID} 
-          noteText={newID.toString()}
           notePageX={pageX}
           notePageY={pageY}
-          isBeingHovered={setIsHoveringElement}
+          isBeingHovered={setIsHoveringNote}
+          setIDToBeDeleted={setIDToBeDeleted}
           />
     setNotes([...notes, newNote])
   }
+
+  useEffect(() => {
+    for(let i = 0; i < notes.length; i++) {
+      if(notes[i] !== undefined && notes[i].props.noteId == noteIDToDelete) {
+        let new_arr = notes
+        new_arr.splice(i,1)
+        setNotes(new_arr)
+        setIsHoveringNote(false)
+        console.log(notes)
+        break
+      }
+    }
+  }, [noteIDToDelete])
 
   const clearAllNotes = () => {
       setNotes([]);
   }
 
-  const addNoteWithClick = ({pageX, pageY}) => {
-    if(!isHoveringAnotherNote) {
-      if(pageY > 100) {
-        addNote(pageX, pageY)
-      }
-    }
+  const toggleSettingsVisible = () => {
+    setSettingsVisibility(!settingsWindowVisible)
   }
 
   return (
     
     <div className="App" onClick={addNoteWithClick}>
-      <Navbar navbarAddNote={addNote} navbarClearAll={clearAllNotes}></Navbar>
-      <ul>
-        {data.map((item, index) => (
-          <li key={index}>{item.id}</li>
-        ))}
-      </ul>
-      <Board notes={notes}></Board>
+      <Navbar 
+        navbarAddNote={() => addNote(windowCenterX + getRandomIntInRange(-50,50),windowCenterY + getRandomIntInRange(-50,50))} 
+        navbarClearAll={clearAllNotes} 
+        isBeingHovered={setIsHoveringNavbar}
+        toggleSettingsVisible={toggleSettingsVisible}
+        areSettingsVisible={settingsWindowVisible}/>
+      <Board notes={notes}/>
+      <SettingsWindow isVisible={settingsWindowVisible} toggleVisible = {toggleSettingsVisible}/>
     </div>
   );
 }
