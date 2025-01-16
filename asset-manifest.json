@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/Tondo/static/css/main.f826d9b9.css",
-    "main.js": "/Tondo/static/js/main.afc52c4a.js",
+    "main.css": "/Tondo/static/css/main.4c39331c.css",
+    "main.js": "/Tondo/static/js/main.4cfec6e8.js",
     "index.html": "/Tondo/index.html",
-    "main.f826d9b9.css.map": "/Tondo/static/css/main.f826d9b9.css.map",
-    "main.afc52c4a.js.map": "/Tondo/static/js/main.afc52c4a.js.map"
+    "main.4c39331c.css.map": "/Tondo/static/css/main.4c39331c.css.map",
+    "main.4cfec6e8.js.map": "/Tondo/static/js/main.4cfec6e8.js.map"
   },
   "entrypoints": [
-    "static/css/main.f826d9b9.css",
-    "static/js/main.afc52c4a.js"
+    "static/css/main.4c39331c.css",
+    "static/js/main.4cfec6e8.js"
   ]
 }
