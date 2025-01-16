@@ -9,10 +9,11 @@ const BoardNote = (props) => {
     const locationY = props.notePageY - 80
     const st = {marginLeft:locationX, marginTop:locationY}
 
-    const [noteText, setNoteText] = useState('')
+    const [noteText, setNoteText] = useState(props.noteText)
 
     const handleInputChange = (event) => {
         setNoteText(event.target.value)
+        localStorage.setItem(props.noteId, [props.notePageX, props.notePageY, noteText])
       }
 
     return (
@@ -31,6 +32,7 @@ const BoardNote = (props) => {
             <textarea 
                 value = {noteText} 
                 onChange={handleInputChange}
+                onBlur={handleInputChange}
                 type="text" 
                 className="BoardNoteTextBox" 
                 placeholder="Todo..." 
