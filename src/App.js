@@ -41,7 +41,6 @@ function getRandomIntInRange(min, max) {
 
 function App() {
 
-  const [data, setData] = useState([])
   const [notes, setNotes] = useState([])
 
   const [isHoveringNavBar, setIsHoveringNavbar] = useState(false)
@@ -75,32 +74,76 @@ function App() {
   // }
 //#endregion
 
-  const addNoteWithClick = ({pageX, pageY}) => {
-    if(!isHoveringAnotherNote && !isHoveringNavBar && !settingsWindowVisible) {
-      addNote(pageX, pageY)
-    }
+  const createNoteFromLocalStorage = (noteID, pageX, pageY, noteText) => {
+    return <BoardNote 
+          noteId={noteID} 
+          notePageX={pageX}
+          notePageY={pageY}
+          noteText={noteText}
+          isBeingHovered={setIsHoveringNote}
+          setIDToBeDeleted={setIDToBeDeleted}
+          />
   }
 
-  const addNote = (pageX, pageY) => {
-    let newID = genRandomNoteUID()
+  // populates notes based on localStorage
+  useEffect(() => {
+    var toAdd = [];
+    if(localStorage.length > 0) {
+      Object.keys(localStorage).forEach((key) => {
+        const note = localStorage.getItem(key);
+        
+        var pageX = '';
+        var pageY = '';
+
+        let ptr = 0;
+        while(note[ptr] != ',') {
+          pageX += note[ptr];
+          ptr += 1;
+        }
+        ptr += 1;
+        while(note[ptr] != ',') {
+          pageY += note[ptr];
+          ptr += 1;
+        }
+        ptr += 1;
+
+        const newNote = createNoteFromLocalStorage(key, Number(pageX), Number(pageY), note.substring(ptr, note.length)); //TODO: add proper note text in third field
+        toAdd.push(newNote);
+      })
+      setNotes(toAdd);
+    }
+  }, [])
+
+  const addNote = (pageX, pageY, noteText) => {
+    let newID = genRandomNoteUID();
     const newNote = <BoardNote 
           noteId={newID} 
           notePageX={pageX}
           notePageY={pageY}
+          noteText={noteText}
           isBeingHovered={setIsHoveringNote}
           setIDToBeDeleted={setIDToBeDeleted}
           />
-    setNotes([...notes, newNote])
+    setNotes([...notes, newNote]);
+
+    localStorage.setItem(newID, [pageX, pageY, noteText]);
   }
 
+  const addNoteWithClick = ({pageX, pageY}) => {
+    if(!isHoveringAnotherNote && !isHoveringNavBar && !settingsWindowVisible) {
+      addNote(pageX, pageY, '');
+    }
+  }
+
+  // checks for and deletes note that was marked for deletion
   useEffect(() => {
     for(let i = 0; i < notes.length; i++) {
       if(notes[i] !== undefined && notes[i].props.noteId == noteIDToDelete) {
+        localStorage.removeItem(noteIDToDelete);
         let new_arr = notes
         new_arr.splice(i,1)
         setNotes(new_arr)
         setIsHoveringNote(false)
-        console.log(notes)
         break
       }
     }
@@ -108,7 +151,8 @@ function App() {
 
   const clearAllNotes = () => {
       setNotes([]);
-  }
+      localStorage.clear();
+    }
 
   const toggleSettingsVisible = () => {
     setSettingsVisibility(!settingsWindowVisible)
@@ -123,7 +167,9 @@ function App() {
         isBeingHovered={setIsHoveringNavbar}
         toggleSettingsVisible={toggleSettingsVisible}
         areSettingsVisible={settingsWindowVisible}/>
+
       <Board notes={notes}/>
+
       <SettingsWindow isVisible={settingsWindowVisible} toggleVisible = {toggleSettingsVisible}/>
     </div>
   );

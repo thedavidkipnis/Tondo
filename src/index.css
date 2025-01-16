@@ -2,6 +2,17 @@
 body, html { 
   margin: 0;
   padding: 0;
+
+  --main-color: rgb(0, 0, 0);
+  --secondary-color: white;
+  --accent-color: rgb(165, 165, 165);
+  --action-accent-color: rgb(138, 132, 255);
+
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+
+button {
+  font-family: inherit;
 }
 
 .App {
@@ -11,8 +22,9 @@ body, html {
 
 .Navbar {
   display: flex;
-  background-color: rgb(138, 132, 255);
+  background-color: var(--main-color);
   align-items: center;
+  justify-content: center;
   height: 6vh;
   min-height: 50px;
   padding: 0 0 0 0;
@@ -32,16 +44,20 @@ body, html {
   height: 100%;
   width: 50%;
   text-align: right;
+  align-content: center;
+
+  padding-right: 1vw;
 }
 
 .NavbarButton {
-  color: rgb(138, 132, 255);
-  background-color: white;
+  color: var(--secondary-color);
+  background-color: var(--main-color);
+  border-color: var(--secondary-color);
   height: 40px;
   width: 100px;
-  border-style: none;
+  border-style: solid;
   margin: 5px 5px 5px 5px;
-  border-radius: 10px;
+  border-radius: 5px;
 
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
@@ -54,14 +70,15 @@ body, html {
 }
 
 .NavbarButton:hover {
-  background-color: rgb(69, 62, 197);
-  color: white;
+  background-color: var(--secondary-color);
+  color: var(--main-color);
   transition: .2s;
 }
 
 .NavbarButton:active {
-  color: white;
-  background-color: rgb(200, 197, 255);
+  color: var(--secondary-color);
+  background-color: var(--action-accent-color);
+  border-color: var(--action-accent-color);
   transition: .05s;
 }
 
@@ -85,11 +102,11 @@ body, html {
   text-align: center;
   vertical-align: middle;
   align-items: center;
-  background-color: rgb(200, 197, 255);
+  background-color: var(--main-color);
   border-radius: 5px 0px 5px 5px;
   border: 2px;
   border-style: solid;
-  border-color: white;
+  border-color: var(--secondary-color);
   width: 150px;
   height: 100px;
   position: absolute;
@@ -110,7 +127,7 @@ body, html {
 }
 
 .BoardNoteCloseMarker:hover {
-  color: rgb(138, 132, 255);
+  color: var(--action-accent-color);
   transition: .2s;
 }
 
@@ -126,5 +143,5 @@ body, html {
 }
 
 .InstructionText {
-  color: rgb(200, 197, 255);
+  color: var(--accent-color);
 }
