@@ -16,7 +16,7 @@ const BoardNote = (props) => {
       }
 
     return (
-        <Draggable>
+        // <Draggable>
         <div className="BoardNote" 
                 key={id} style={st} 
                 onMouseEnter={() => props.isBeingHovered(true)}
@@ -37,7 +37,7 @@ const BoardNote = (props) => {
                 autoFocus 
             />
         </div>
-        </Draggable>
+        // </Draggable>
     );
 
 
