@@ -127,7 +127,7 @@ function App() {
           />
     setNotes([...notes, newNote]);
 
-    localStorage.setItem(newID, [pageX, pageY, newID]);
+    localStorage.setItem(newID, [pageX, pageY, noteText]);
   }
 
   const addNoteWithClick = ({pageX, pageY}) => {

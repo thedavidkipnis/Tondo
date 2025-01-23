@@ -13,6 +13,7 @@ const BoardNote = (props) => {
     const handleInputChange = (event) => {
         setNoteText(event.target.value)
         localStorage.setItem(props.noteId, [props.notePageX, props.notePageY, noteText])
+        console.log(noteText)
       }
 
     return (
