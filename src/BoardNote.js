@@ -1,6 +1,5 @@
 import { useState } from "react"
-import Draggable from 'react-draggable'
-import InstructionText from "./InstructionText"
+// import Draggable from 'react-draggable'
 
 const BoardNote = (props) => {
 
@@ -18,8 +17,8 @@ const BoardNote = (props) => {
 
     return (
         // <Draggable>
-        <div className="BoardNote" 
-                key={id} style={st} 
+        <div className="BoardNote"
+                key={props.noteId} style={st} 
                 onMouseEnter={() => props.isBeingHovered(true)}
                 onMouseLeave={() => props.isBeingHovered(false)}
                 >
