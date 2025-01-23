@@ -139,7 +139,7 @@ function App() {
   // checks for and deletes note that was marked for deletion
   useEffect(() => {
     for(let i = 0; i < notes.length; i++) {
-      if(notes[i].props.noteId === noteIDToDelete) {
+      if(noteIDToDelete && notes[i].props.noteId === noteIDToDelete) {
         localStorage.removeItem(noteIDToDelete);
         let new_arr = notes
         new_arr.splice(i,1)
@@ -149,7 +149,7 @@ function App() {
         break
       }
     }
-  }, [noteIDToDelete])
+  }, [noteIDToDelete, notes])
 
   const clearAllNotes = () => {
       setNotes([]);
