@@ -2,7 +2,6 @@ import Navbar from './Navbar'
 import BoardNote from "./BoardNote"
 import Board from './Board'
 import SettingsWindow from './SettingsWindow'
-import InstructionText from './InstructionText'
 import { useEffect, useState } from "react"
 
 /*
@@ -76,6 +75,7 @@ function App() {
 
   const createNoteFromLocalStorage = (noteID, pageX, pageY, noteText) => {
     return <BoardNote 
+          key={noteID}
           noteId={noteID} 
           notePageX={pageX}
           notePageY={pageY}
@@ -96,12 +96,12 @@ function App() {
         var pageY = '';
 
         let ptr = 0;
-        while(note[ptr] != ',') {
+        while(note[ptr] !== ',') {
           pageX += note[ptr];
           ptr += 1;
         }
         ptr += 1;
-        while(note[ptr] != ',') {
+        while(note[ptr] !== ',') {
           pageY += note[ptr];
           ptr += 1;
         }
@@ -116,7 +116,8 @@ function App() {
 
   const addNote = (pageX, pageY, noteText) => {
     let newID = genRandomNoteUID();
-    const newNote = <BoardNote 
+    const newNote = <BoardNote
+          key={newID} 
           noteId={newID} 
           notePageX={pageX}
           notePageY={pageY}
@@ -126,7 +127,7 @@ function App() {
           />
     setNotes([...notes, newNote]);
 
-    localStorage.setItem(newID, [pageX, pageY, noteText]);
+    localStorage.setItem(newID, [pageX, pageY, newID]);
   }
 
   const addNoteWithClick = ({pageX, pageY}) => {
@@ -138,12 +139,13 @@ function App() {
   // checks for and deletes note that was marked for deletion
   useEffect(() => {
     for(let i = 0; i < notes.length; i++) {
-      if(notes[i] !== undefined && notes[i].props.noteId == noteIDToDelete) {
+      if(notes[i].props.noteId === noteIDToDelete) {
         localStorage.removeItem(noteIDToDelete);
         let new_arr = notes
         new_arr.splice(i,1)
         setNotes(new_arr)
         setIsHoveringNote(false)
+        setIDToBeDeleted(null)
         break
       }
     }
