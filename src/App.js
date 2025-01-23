@@ -30,6 +30,8 @@ TODO: draggable needs to be fixed
 const windowCenterX = (window.innerWidth/2) - 75
 const windowCenterY = (window.innerHeight/2) - 50
 
+const placeHolderTextSamples = [':)','B^)',':0',':-)',':D','^_^',':3','O.o']
+
 function genRandomNoteUID() {
   return Date.now().toString(36) + Math.random().toString(36).substr(2)
 }
@@ -122,6 +124,7 @@ function App() {
           notePageX={pageX}
           notePageY={pageY}
           noteText={noteText}
+          placeHolderText={placeHolderTextSamples[Math.floor(Math.random()*placeHolderTextSamples.length)]}
           isBeingHovered={setIsHoveringNote}
           setIDToBeDeleted={setIDToBeDeleted}
           />
@@ -164,7 +167,7 @@ function App() {
     
     <div className="App" onClick={addNoteWithClick}>
       <Navbar 
-        navbarAddNote={() => addNote(windowCenterX + getRandomIntInRange(-50,50),windowCenterY + getRandomIntInRange(-50,50))} 
+        navbarAddNote={() => addNote(windowCenterX + getRandomIntInRange(-200,200),windowCenterY + getRandomIntInRange(-200,200))} 
         navbarClearAll={clearAllNotes} 
         isBeingHovered={setIsHoveringNavbar}
         toggleSettingsVisible={toggleSettingsVisible}

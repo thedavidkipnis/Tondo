@@ -34,7 +34,7 @@ const BoardNote = (props) => {
                 onBlur={handleInputChange}
                 type="text" 
                 className="BoardNoteTextBox" 
-                placeholder="Todo..." 
+                placeholder={props.placeHolderText}
                 autoFocus 
             />
         </div>
