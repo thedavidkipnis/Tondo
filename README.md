@@ -10,6 +10,7 @@ Currently works with local storage, so just go to the link and all notes should 
 
 Future work:
 - Undo/Ctrl + z stack
+- Switch to Firebase for data storage and retreival + auth
 - Support for resizable windows (notes that were previously created on a bigger screen get cut off when the page is loaded on a smaller screen)
 
 This is a WIP! To use in current state:
