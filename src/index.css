@@ -3,10 +3,10 @@ body, html {
   margin: 0;
   padding: 0;
 
-  --main-color: rgb(0, 0, 0);
+  --main-color: rgb(30,31,38);
   --secondary-color: white;
-  --accent-color: rgb(165, 165, 165);
-  --action-accent-color: rgb(138, 132, 255);
+  --accent-color: rgb(165, 165, 165); 
+  --action-accent-color: rgb(234, 200, 117);
 
   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
@@ -76,7 +76,7 @@ button {
 }
 
 .NavbarButton:active {
-  color: var(--secondary-color);
+  color: var(--main-color);
   background-color: var(--action-accent-color);
   border-color: var(--action-accent-color);
   transition: .05s;

@@ -1,5 +1,3 @@
-import { useState } from 'react'
-import Board from './Board'
 
 const Navbar = (props) => {
 
@@ -9,6 +7,7 @@ const Navbar = (props) => {
                 {/* <NavbarButton buttonText={"Settings"} buttonFunction={props.toggleSettingsVisible}/> */}
             </div>
             <div className="NavbarRightHalfButtons">
+                <NavbarButton buttonText={"Undo"} buttonFunction={props.navbarProcessUndoStack}/>
                 <NavbarButton buttonText={"Clear All"} buttonFunction={props.navbarClearAll}/>
                 <NavbarButton buttonText={"New Note"} buttonFunction={props.navbarAddNote}/>
             </div>
