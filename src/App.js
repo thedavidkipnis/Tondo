@@ -1,44 +1,26 @@
-import Navbar from './Navbar'
-import BoardNote from "./BoardNote"
-import Board from './Board'
-import SettingsWindow from './SettingsWindow'
+import Navbar from './components/Navbar'
+import BoardNote from "./components/BoardNote"
+import Board from './components/Board'
+import SettingsWindow from './components/SettingsWindow'
 import { useEffect, useState } from "react"
-
-/*
-To install react: Install node.js, run npx create-react-app tts in cmd
-To open VSCode in a directory from cmd: navigate to directory, run "code ."
-If node_modules is missing: run "install npm", this will look at the package.json folder and install everything from the dependencies
-
-Core functionality:
-- add a sticky (either by clicking on screen or + button on nav bar)
-- erase all (nav bar) (with confirmation, i.e. "are you sure you want to delete all your notes?")
-
-- current Postgres + React tutorial
-- https://blog.logrocket.com/getting-started-postgres-react-app/
-*/
-
-/*
-Current bug: when switching to using obj/dict instead of array for Notes, when creating notes in order,
-if all notes have text, deleting the first note that was created deletes all the text for the notes that
-were created after it
-*/
+import * as hp from "./helpers"
 
 /* 
 TODO: draggable needs to be fixed
 3 notes a,b, and c are created in that order. C gets dragged somewhere. If a or b get deleted, c gets moved back to the original spot where it was created
 */
-const windowCenterX = (window.innerWidth/2) - 75
-const windowCenterY = (window.innerHeight/2) - 50
+
+/*
+CURRENT BUG:
+- Create several notes -> Clear All -> Undo -> page refresh ; this deletes at random one of the notes
+*/
+
+const windowCenterX = (window.innerWidth/2) - 75;
+const windowCenterY = (window.innerHeight/2) - 50;
+
+const undoStack = [];
 
 const placeHolderTextSamples = [':)','B^)',':0',':-)',':D','^_^',':3','O.o']
-
-function genRandomNoteUID() {
-  return Date.now().toString(36) + Math.random().toString(36).substr(2)
-}
-
-function getRandomIntInRange(min, max) {
-  return Math.random() * (max - min) + min;
-}
 
 function App() {
 
@@ -49,31 +31,6 @@ function App() {
   const [noteIDToDelete, setIDToBeDeleted] = useState(null)
 
   const [settingsWindowVisible, setSettingsVisibility] = useState(false)
-
-//#region db stuff
-  // useEffect(() => {
-  //   fetch('http://localhost:5000/api/data')
-  //     .then((response) => response.json())
-  //     .then((data) => processDBData(data))
-  //     .catch((error) => console.error(error));
-  // }, []);
-
-    // function processDBData(dbdata) {
-  //   let new_arr = []
-  //     dbdata.forEach(d => {
-  //       const newNote = <BoardNote 
-  //           noteId={d.id} 
-  //           noteText={d.text}
-  //           notePageX={d.posx}
-  //           notePageY={d.posy}
-  //           isBeingHovered={setIsHoveringNote}
-  //           setIDToBeDeleted={setIDToBeDeleted}
-  //           />
-  //         new_arr.push(newNote)
-  //       })
-  //   setNotes(new_arr)
-  // }
-//#endregion
 
   const createNoteFromLocalStorage = (noteID, pageX, pageY, noteText) => {
     return <BoardNote 
@@ -94,30 +51,22 @@ function App() {
       Object.keys(localStorage).forEach((key) => {
         const note = localStorage.getItem(key);
         
-        var pageX = '';
-        var pageY = '';
+        let noteData = hp.processLocalStorageEntry(note)
 
-        let ptr = 0;
-        while(note[ptr] !== ',') {
-          pageX += note[ptr];
-          ptr += 1;
-        }
-        ptr += 1;
-        while(note[ptr] !== ',') {
-          pageY += note[ptr];
-          ptr += 1;
-        }
-        ptr += 1;
-
-        const newNote = createNoteFromLocalStorage(key, Number(pageX), Number(pageY), note.substring(ptr, note.length)); //TODO: add proper note text in third field
+        const newNote = createNoteFromLocalStorage(key, noteData[0], noteData[1], noteData[2]);
         toAdd.push(newNote);
       })
       setNotes(toAdd);
     }
   }, [])
 
-  const addNote = (pageX, pageY, noteText) => {
-    let newID = genRandomNoteUID();
+  const addNote = (noteID, pageX, pageY, noteText) => {
+    let newID = ''
+    if(noteID) {
+      newID = noteID
+    } else {
+      newID = hp.genRandomNoteUID();
+    }
     const newNote = <BoardNote
           key={newID} 
           noteId={newID} 
@@ -128,14 +77,15 @@ function App() {
           isBeingHovered={setIsHoveringNote}
           setIDToBeDeleted={setIDToBeDeleted}
           />
+          
     setNotes([...notes, newNote]);
-
     localStorage.setItem(newID, [pageX, pageY, noteText]);
+    
   }
 
   const addNoteWithClick = ({pageX, pageY}) => {
     if(!isHoveringAnotherNote && !isHoveringNavBar && !settingsWindowVisible) {
-      addNote(pageX, pageY, '');
+      addNote(null, pageX, pageY, '');
     }
   }
 
@@ -143,21 +93,92 @@ function App() {
   useEffect(() => {
     for(let i = 0; i < notes.length; i++) {
       if(noteIDToDelete && notes[i].props.noteId === noteIDToDelete) {
+
+        undoStack.push(['-', [noteIDToDelete, localStorage.getItem(noteIDToDelete)].join(",")])
+
         localStorage.removeItem(noteIDToDelete);
         let new_arr = notes
         new_arr.splice(i,1)
         setNotes(new_arr)
         setIsHoveringNote(false)
         setIDToBeDeleted(null)
+
         break
       }
     }
   }, [noteIDToDelete, notes])
 
   const clearAllNotes = () => {
+      if(notes.length < 1) {
+        return;
+      }  
+
+      undoStack.push(['//', '']) // stack blocker to handle back to back 'clear all' calls
+      Object.keys(localStorage).forEach((key) => {
+        undoStack.push(['--', key + ',' + localStorage.getItem(key)]);
+      })
+
       setNotes([]);
       localStorage.clear();
     }
+
+  const processUndoStack = () => {
+    
+    if(undoStack.length < 1) {
+      return;
+    }
+
+    let stackElement = undoStack.pop()
+    let action = stackElement[0]
+    let note = stackElement[1]
+
+    switch(action) {
+      case '-':
+
+        let noteID = '';
+
+        let ptr = 0;
+        while(note[ptr] !== ',') { //get ID
+          noteID += note[ptr];
+          ptr ++;
+        }
+        ptr++;
+        
+        let noteData = hp.processLocalStorageEntry(note.substring(ptr, note.length)) // get X, Y, note text
+
+        addNote(noteID, noteData[0], noteData[1], noteData[2]);
+
+        break;
+      case '--':
+        let toAdd = []       
+        while(action === '--') {
+
+          let noteID = '';
+
+          let ptr = 0;
+          while(note[ptr] !== ',') { //get ID
+            noteID += note[ptr];
+            ptr ++;
+          }
+          ptr++;
+          
+          let noteData = hp.processLocalStorageEntry(note.substring(ptr, note.length)) // get X, Y, note text
+
+          let newNote = createNoteFromLocalStorage(noteID, noteData[0], noteData[1], noteData[2]);
+          toAdd.push(newNote);
+
+          stackElement = undoStack.pop()
+          action = stackElement[0]
+          note = stackElement[1]
+        }
+        
+        setNotes(notes.concat(toAdd))
+
+        break;
+      default:
+        break;
+    }
+  }
 
   const toggleSettingsVisible = () => {
     setSettingsVisibility(!settingsWindowVisible)
@@ -167,7 +188,8 @@ function App() {
     
     <div className="App" onClick={addNoteWithClick}>
       <Navbar 
-        navbarAddNote={() => addNote(windowCenterX + getRandomIntInRange(-200,200),windowCenterY + getRandomIntInRange(-200,200))} 
+        navbarProcessUndoStack={processUndoStack}
+        navbarAddNote={() => addNote(null, windowCenterX + hp.getRandomIntInRange(-200,200),windowCenterY + hp.getRandomIntInRange(-200,200))} 
         navbarClearAll={clearAllNotes} 
         isBeingHovered={setIsHoveringNavbar}
         toggleSettingsVisible={toggleSettingsVisible}
