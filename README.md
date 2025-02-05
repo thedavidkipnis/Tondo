@@ -8,7 +8,9 @@ I tend to always have about a billion random things that I need to remember to d
 
 Currently works with local storage, so just go to the link and all notes should be saved on your machine until you clear them manually.
 
-Future work includes adding a PostgreSQL backend! 
+Future work:
+- Undo/Ctrl + z stack
+- Support for resizable windows (notes that were previously created on a bigger screen get cut off when the page is loaded on a smaller screen)
 
 This is a WIP! To use in current state:
 - Clone https://github.com/thedavidkipnis/Tondo.git
