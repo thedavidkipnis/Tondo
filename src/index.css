@@ -156,7 +156,7 @@ button {
 }
 
 @media (max-width: 768px) {
-  .App {
+  .AppContent {
     display: none; /* Hide on mobile */
   }
 
