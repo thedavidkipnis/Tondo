@@ -155,7 +155,7 @@ button {
   display: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 768px), (orientation: landscape) and (max-height: 500px) {
   .AppContent {
     display: none; /* Hide on mobile */
   }
