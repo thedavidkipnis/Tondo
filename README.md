@@ -8,14 +8,9 @@ I tend to always have about a billion random things that I need to remember to d
 
 Currently works with local storage, so just go to the link and all notes should be saved on your machine until you clear them manually.
 
-Future work:
+---
+
+This is a WIP! Future work:
 - Switch to Firebase for data storage and retreival + auth
-
-This is a WIP! To use in current state:
-- Clone https://github.com/thedavidkipnis/Tondo.git
-- Open cmd, and cd into the repo you cloned to
-- Run 'npm install' to install node_modules locally and grab the right dependencies
-- Run 'npm run start' - the project will open in a local browser
-
-If 'npm' doesn't work for you, or throws 'command not found' errors, please refer to [this](https://stackoverflow.com/questions/31472755/sudo-npm-command-not-found) link!
-
+- Note resizing
+- Note moving
