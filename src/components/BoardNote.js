@@ -4,9 +4,9 @@ import { useState } from "react"
 const BoardNote = (props) => {
 
     const id = props.noteId
-    const locationX = props.notePageX - 75
-    const locationY = props.notePageY - 80
-    const st = {marginLeft:locationX, marginTop:locationY}
+    const locationX = props.notePageX - 50
+    const locationY = props.notePageY - 20
+    const st = {left:locationX, top:locationY}
 
     const [noteText, setNoteText] = useState(props.noteText)
 
