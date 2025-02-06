@@ -7,9 +7,9 @@ const Navbar = (props) => {
                 {/* <NavbarButton buttonText={"Settings"} buttonFunction={props.toggleSettingsVisible}/> */}
             </div>
             <div className="NavbarRightHalfButtons">
-                <NavbarButton buttonText={"Undo"} buttonFunction={props.navbarProcessUndoStack}/>
-                <NavbarButton buttonText={"Clear All"} buttonFunction={props.navbarClearAll}/>
-                <NavbarButton buttonText={"New Note"} buttonFunction={props.navbarAddNote}/>
+                <NavbarButton buttonText={"Undo"} buttonFunction={props.navbarProcessUndoStack} isVisible={props.navbarUndoStack.length > 0}/>
+                <NavbarButton buttonText={"Clear All"} buttonFunction={props.navbarClearAll} isVisible={true}/>
+                <NavbarButton buttonText={"New Note"} buttonFunction={props.navbarAddNote} isVisible={true}/>
             </div>
         </nav>
      );
@@ -18,7 +18,9 @@ const Navbar = (props) => {
 const NavbarButton = (props) => {
 
     return (
-        <button className="NavbarButton" onClick={props.buttonFunction}>{props.buttonText}</button>
+        <button className="NavbarButton" onClick={props.buttonFunction} hidden={!props.isVisible}>
+            {props.buttonText}
+        </button>
     )
 }
  

@@ -189,6 +189,7 @@ function App() {
     <div className="App" onClick={addNoteWithClick}>
       <Navbar 
         navbarProcessUndoStack={processUndoStack}
+        navbarUndoStack={undoStack}
         navbarAddNote={() => addNote(null, windowCenterX + hp.getRandomIntInRange(-200,200),windowCenterY + hp.getRandomIntInRange(-200,200))} 
         navbarClearAll={clearAllNotes} 
         isBeingHovered={setIsHoveringNavbar}
