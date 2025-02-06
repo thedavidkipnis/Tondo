@@ -5,16 +5,6 @@ import SettingsWindow from './components/SettingsWindow'
 import { useEffect, useState } from "react"
 import * as hp from "./helpers"
 
-/* 
-TODO: draggable needs to be fixed
-3 notes a,b, and c are created in that order. C gets dragged somewhere. If a or b get deleted, c gets moved back to the original spot where it was created
-*/
-
-/*
-CURRENT BUG:
-- Create several notes -> Clear All -> Undo -> page refresh ; this deletes at random one of the notes
-*/
-
 const windowCenterX = (window.innerWidth/2) - 75;
 const windowCenterY = (window.innerHeight/2) - 50;
 
