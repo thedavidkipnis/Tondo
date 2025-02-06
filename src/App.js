@@ -2,6 +2,7 @@ import Navbar from './components/Navbar'
 import BoardNote from "./components/BoardNote"
 import Board from './components/Board'
 import SettingsWindow from './components/SettingsWindow'
+import MobileSupport from './components/MobileSupport'
 import { useEffect, useState } from "react"
 import * as hp from "./helpers"
 
@@ -177,18 +178,21 @@ function App() {
   return (
     
     <div className="App" onClick={addNoteWithClick}>
-      <Navbar 
-        navbarProcessUndoStack={processUndoStack}
-        navbarUndoStack={undoStack}
-        navbarAddNote={() => addNote(null, windowCenterX + hp.getRandomIntInRange(-200,200),windowCenterY + hp.getRandomIntInRange(-200,200))} 
-        navbarClearAll={clearAllNotes} 
-        isBeingHovered={setIsHoveringNavbar}
-        toggleSettingsVisible={toggleSettingsVisible}
-        areSettingsVisible={settingsWindowVisible}/>
+      <div className='AppContent'>
+        <Navbar 
+          navbarProcessUndoStack={processUndoStack}
+          navbarUndoStack={undoStack}
+          navbarAddNote={() => addNote(null, windowCenterX + hp.getRandomIntInRange(-200,200),windowCenterY + hp.getRandomIntInRange(-200,200))} 
+          navbarClearAll={clearAllNotes} 
+          isBeingHovered={setIsHoveringNavbar}
+          toggleSettingsVisible={toggleSettingsVisible}
+          areSettingsVisible={settingsWindowVisible}/>
 
-      <Board notes={notes}/>
+        <Board notes={notes}/>
 
-      <SettingsWindow isVisible={settingsWindowVisible} toggleVisible = {toggleSettingsVisible}/>
+        <SettingsWindow isVisible={settingsWindowVisible} toggleVisible = {toggleSettingsVisible}/>
+      </div>
+      <MobileSupport />
     </div>
   );
 }

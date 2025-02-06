@@ -20,6 +20,11 @@ button {
   height: 100vh;
 }
 
+.AppContent {
+  width: 100%;
+  height: 100vh;
+}
+
 .Navbar {
   display: flex;
   background-color: var(--main-color);
@@ -144,4 +149,24 @@ button {
 
 .InstructionText {
   color: var(--accent-color);
+}
+
+.MobileSupport {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .App {
+    display: none; /* Hide on mobile */
+  }
+
+  .MobileSupport {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    padding: 20px;
+  }
 }
