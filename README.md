@@ -14,4 +14,5 @@ This is a WIP! Future work:
 - Switch to Firebase for data storage and retreival + auth
 - Note resizing
 - Note moving
+- Themes and styles! (+ dark mode)
 - Mobile Support
