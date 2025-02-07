@@ -1,17 +1,22 @@
+import { useEffect, useState } from "react"
+import * as hp from "./helpers"
+
 import Navbar from './components/Navbar'
 import BoardNote from "./components/BoardNote"
 import Board from './components/Board'
 import SettingsWindow from './components/SettingsWindow'
 import MobileSupport from './components/MobileSupport'
-import { useEffect, useState } from "react"
-import * as hp from "./helpers"
+
+import FirebaseAgent from './firebase/FirebaseAgent'
 
 const windowCenterX = (window.innerWidth/2) - 75;
 const windowCenterY = (window.innerHeight/2) - 50;
 
 const undoStack = [];
 
-const placeHolderTextSamples = [':)','B^)',':0',':-)',':D','^_^',':3','O.o']
+const placeHolderTextSamples = [':)','B^)',':0',':-)',':D','^_^',':3','O.o'];
+
+const FBAgent = new FirebaseAgent();
 
 function App() {
 
@@ -52,6 +57,7 @@ function App() {
   }, [])
 
   const addNote = (noteID, pageX, pageY, noteText) => {
+
     let newID = ''
     if(noteID) {
       newID = noteID
