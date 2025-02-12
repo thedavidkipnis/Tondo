@@ -1,3 +1,9 @@
+/* 
+Board component that renders all notes
+
+Authored: David Kipnis, 2024
+*/
+
 import InstructionText from "./InstructionText";
 
 const Board = (props) => {

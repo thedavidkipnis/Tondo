@@ -1,3 +1,8 @@
+/* 
+Component for representing settings window
+
+Authored: David Kipnis, 2024
+*/
 
 const SettingsWindow = (props) => {
 

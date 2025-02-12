@@ -1,3 +1,9 @@
+/* 
+A React web application that acts as a board of sticky notes for writing down ideas or todo's
+
+Authored: David Kipnis, 2024
+*/
+
 import Navbar from './components/Navbar'
 import BoardNote from "./components/BoardNote"
 import Board from './components/Board'
@@ -23,6 +29,7 @@ function App() {
 
   const [settingsWindowVisible, setSettingsVisibility] = useState(false)
 
+  // creates a BoardNote component
   const createNoteFromLocalStorage = (noteID, pageX, pageY, noteText) => {
     return <BoardNote 
           key={noteID}
@@ -35,7 +42,7 @@ function App() {
           />
   }
 
-  // populates notes based on localStorage
+  // populates notes from what is found in localStorage
   useEffect(() => {
     var toAdd = [];
     if(localStorage.length > 0) {
@@ -51,6 +58,7 @@ function App() {
     }
   }, [])
 
+  // adds note to the current note list and updates local storage
   const addNote = (noteID, pageX, pageY, noteText) => {
     let newID = ''
     if(noteID) {
@@ -74,6 +82,7 @@ function App() {
     
   }
 
+  // used by navbar button to add note with a click
   const addNoteWithClick = ({pageX, pageY}) => {
     if(!isHoveringAnotherNote && !isHoveringNavBar && !settingsWindowVisible) {
       addNote(null, pageX, pageY, '');
@@ -100,19 +109,20 @@ function App() {
   }, [noteIDToDelete, notes])
 
   const clearAllNotes = () => {
-      if(notes.length < 1) {
-        return;
-      }  
+    if(notes.length < 1) {
+      return;
+    }  
 
-      undoStack.push(['//', '']) // stack blocker to handle back to back 'clear all' calls
-      Object.keys(localStorage).forEach((key) => {
-        undoStack.push(['--', key + ',' + localStorage.getItem(key)]);
-      })
+    undoStack.push(['//', '']) // stack blocker to handle back to back 'clear all' calls
+    Object.keys(localStorage).forEach((key) => {
+      undoStack.push(['--', key + ',' + localStorage.getItem(key)]);
+    })
 
-      setNotes([]);
-      localStorage.clear();
-    }
+    setNotes([]);
+    localStorage.clear();
+  }
 
+  // checks the undoStack for actions and processes them based on top action
   const processUndoStack = () => {
     
     if(undoStack.length < 1) {
@@ -124,7 +134,7 @@ function App() {
     let note = stackElement[1]
 
     switch(action) {
-      case '-':
+      case '-': // one note was deleted
 
         let noteID = '';
 
@@ -140,7 +150,7 @@ function App() {
         addNote(noteID, noteData[0], noteData[1], noteData[2]);
 
         break;
-      case '--':
+      case '--': // clear all was called
         let toAdd = []       
         while(action === '--') {
 

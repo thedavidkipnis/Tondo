@@ -1,5 +1,9 @@
 // collection of helper functions used across the app
 
+/* 
+Input: localStorage string entry (i.e. 'id,x,y,noteText')
+Output: array with string entry 
+*/
 export function processLocalStorageEntry(entryString) {
     var pageX = '';
     var pageY = '';

@@ -1,3 +1,9 @@
+/* 
+BoardNote component that represents a single note in the app
+
+Authored: David Kipnis, 2024
+*/
+
 import { useState } from "react"
 // import Draggable from 'react-draggable'
 

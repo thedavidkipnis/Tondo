@@ -1,3 +1,8 @@
+/* 
+Display for when a user logs in with no mobile support
+
+Authored: David Kipnis, 2024
+*/
 
 const MobileSupport = () => {
   return (
