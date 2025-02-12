@@ -77,7 +77,7 @@ function App() {
           
     setNotes([...notes, newNote]);
     localStorage.setItem(newID, [pageX, pageY, noteText]);
-    
+    FBAgent.addNote(newID, pageX, pageY, noteText);
   }
 
   const addNoteWithClick = ({pageX, pageY}) => {

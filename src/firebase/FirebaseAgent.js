@@ -24,24 +24,25 @@ export default class FireBaseAgent {
         this.db = getFirestore(this.app);
         this.auth = getAuth(this.app);
 
-        signInWithEmailAndPassword(this.auth, "pankimatick@gmail.com", "")
+        signInWithEmailAndPassword(this.auth, "pankimatick@gmail.com", "testpass")
             .then((userCred) =>
-                console.log("LOGGED IN")
+                console.log("LOGGED IN", this.auth.currentUser)
             ).catch((error) => {
                 console.log("LOGIN FAILED");
               })
 
     }
 
-    async addNote() {
+    async addNote(newID, pageX, pageY, noteText) {
         const notesRef = collection(this.db, "notes");
 
-        await setDoc(doc(notesRef, "TEST001"), {
+        await setDoc(doc(notesRef, newID), {
             userID: "TEST",
-            screenLocationX: 100,
-            screenLocationY: 100,
+            screenLocationX: pageX,
+            screenLocationY: pageY,
             noteText: "SAMPLE NOTE TEXT"
         })
+        console.log("FBAgent: added note at", pageX, pageY)
     }
 
     async getNote() {
