@@ -1,7 +1,9 @@
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
+import * as hp from "../helpers"
+
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, doc, getDoc, setDoc } from "firebase/firestore";
+import { getFirestore, collection, doc, getDoc, setDoc, writeBatch} from "firebase/firestore";
 
 export default class FireBaseAgent {
 
@@ -17,11 +19,13 @@ export default class FireBaseAgent {
 
     app = null;
     db = null;
+    batch = null;
     auth = null;
 
     constructor() {
         this.app = initializeApp(this.firebaseConfig);
         this.db = getFirestore(this.app);
+        this.batch = writeBatch(this.db);
         this.auth = getAuth(this.app);
 
         signInWithEmailAndPassword(this.auth, "pankimatick@gmail.com", "testpass")
@@ -46,6 +50,7 @@ export default class FireBaseAgent {
     }
 
     async getNote() {
+
         const docRef = doc(this.db, "notes", "TEST001");
         const docSnap = await getDoc(docRef);
 
@@ -54,5 +59,23 @@ export default class FireBaseAgent {
           } else {
             console.log("No such document!");
           }
+    }
+
+    async saveData() {
+
+        if(localStorage.length > 0) {
+
+            Object.keys(localStorage).forEach((key) => {
+                let noteData = hp.processLocalStorageEntry(localStorage.getItem(key));
+                const docRef = doc(this.db, "notes", key);
+                this.batch.set(docRef, {'screenLocationX': noteData[0], 
+                                        'screenLocationY': noteData[1], 
+                                        'noteText': noteData[2],
+                                        'userID': 'TEST'
+                                    });
+            })
+
+            await this.batch.commit();
+        }
     }
 }

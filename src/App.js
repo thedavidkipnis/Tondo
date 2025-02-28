@@ -28,6 +28,10 @@ function App() {
 
   const [settingsWindowVisible, setSettingsVisibility] = useState(false)
 
+  const saveFirestoreData = () => {
+    FBAgent.saveData();
+  }
+
   const createNoteFromLocalStorage = (noteID, pageX, pageY, noteText) => {
     return <BoardNote 
           key={noteID}
@@ -77,7 +81,7 @@ function App() {
           
     setNotes([...notes, newNote]);
     localStorage.setItem(newID, [pageX, pageY, noteText]);
-    FBAgent.addNote(newID, pageX, pageY, noteText);
+    //FBAgent.addNote(newID, pageX, pageY, noteText);
   }
 
   const addNoteWithClick = ({pageX, pageY}) => {
@@ -188,8 +192,8 @@ function App() {
         <Navbar 
           navbarProcessUndoStack={processUndoStack}
           navbarUndoStack={undoStack}
-          navbarAddNote={() => addNote(null, windowCenterX + hp.getRandomIntInRange(-200,200),windowCenterY + hp.getRandomIntInRange(-200,200))} 
           navbarClearAll={clearAllNotes} 
+          navbarSaveData={saveFirestoreData} 
           isBeingHovered={setIsHoveringNavbar}
           toggleSettingsVisible={toggleSettingsVisible}
           areSettingsVisible={settingsWindowVisible}/>

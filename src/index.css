@@ -41,6 +41,9 @@ button {
   height: 100%;
   width: 50%;
   text-align: left;
+  align-content: center;
+
+  padding-right: 1vw;
 }
 
 .NavbarRightHalfButtons {
