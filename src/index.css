@@ -128,7 +128,9 @@ button {
   text-align: right;
   right: 0;
   width: 10px;
-  transition: .2s;
+
+  font-family: monospace;
+  font-size: 120%;
 }
 
 .BoardNoteTextBox {

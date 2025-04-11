@@ -33,7 +33,7 @@ const BoardNote = (props) => {
                 onMouseLeave={() => props.isBeingHovered(false)}
                 >
             <div className="BoardNoteCloseMarkerContainer">
-                <div style={{width: '85%'}}></div>
+                <div style={{width: '89%'}}></div>
                 <div className="BoardNoteCloseMarker"
                     onClick={() => props.setIDToBeDeleted(id)}
                     onMouseEnter={() => setNoteCloseMarkerIcon('x')}
