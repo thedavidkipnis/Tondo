@@ -12,6 +12,7 @@ Currently works with local storage, so just go to the link and all notes should 
 
 This is a WIP! Future work:
 - Switch to Firebase for data storage and retreival + auth
+- Tabs (I.e. creating a new tab for a subset of notes to stay organized)
 - Note resizing
 - Note moving
 - Themes and styles! (+ dark mode)

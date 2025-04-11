@@ -4,7 +4,7 @@ BoardNote component that represents a single note in the app
 Authored: David Kipnis, 2024
 */
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 // import Draggable from 'react-draggable'
 
 const BoardNote = (props) => {
@@ -18,8 +18,11 @@ const BoardNote = (props) => {
 
     const handleInputChange = (event) => {
         setNoteText(event.target.value)
-        localStorage.setItem(props.noteId, [props.notePageX, props.notePageY, noteText])
       }
+
+    useEffect(() => {
+        localStorage.setItem(props.noteId, [props.notePageX, props.notePageY, noteText])
+    }, [noteText])
 
     return (
         // <Draggable>
@@ -37,7 +40,6 @@ const BoardNote = (props) => {
             <textarea 
                 value = {noteText} 
                 onChange={handleInputChange}
-                onBlur={handleInputChange}
                 type="text" 
                 className="BoardNoteTextBox" 
                 placeholder={props.placeHolderText}
