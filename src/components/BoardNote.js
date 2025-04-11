@@ -15,6 +15,7 @@ const BoardNote = (props) => {
     const st = {left:locationX, top:locationY}
 
     const [noteText, setNoteText] = useState(props.noteText)
+    const [noteCloseMarkerIcon, setNoteCloseMarkerIcon] = useState('●')
 
     const handleInputChange = (event) => {
         setNoteText(event.target.value)
@@ -34,7 +35,10 @@ const BoardNote = (props) => {
             <div className="BoardNoteCloseMarkerContainer">
                 <div style={{width: '85%'}}></div>
                 <div className="BoardNoteCloseMarker"
-                    onClick={() => props.setIDToBeDeleted(id)}>X</div>
+                    onClick={() => props.setIDToBeDeleted(id)}
+                    onMouseEnter={() => setNoteCloseMarkerIcon('x')}
+                    onMouseLeave={() => setNoteCloseMarkerIcon('●')}
+                    >{noteCloseMarkerIcon}</div>
             </div>
             
             <textarea 

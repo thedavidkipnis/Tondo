@@ -131,11 +131,6 @@ button {
   transition: .2s;
 }
 
-.BoardNoteCloseMarker:hover {
-  color: var(--action-accent-color);
-  transition: .2s;
-}
-
 .BoardNoteTextBox {
   width: 80%;
   margin: 0 0 0 0;
