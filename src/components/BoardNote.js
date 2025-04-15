@@ -51,10 +51,12 @@ const BoardNote = (props) => {
     // checks when mouse is lifted off the note
     const handleMouseUp = () => {
         draggingRef.current = false;
-
         props.isBeingDragged(false);
 
-        //localStorage.setItem(props.noteId, [position.x, position.y, noteText]);
+        localStorage.setItem(props.noteId, [
+            noteRef.current.getBoundingClientRect().left, 
+            noteRef.current.getBoundingClientRect().top, 
+            noteText]);
 
         window.removeEventListener("mousemove", handleMouseMove);
         window.removeEventListener("mouseup", handleMouseUp);
@@ -75,7 +77,6 @@ const BoardNote = (props) => {
                 onMouseEnter={() => props.isBeingHovered(true)}
                 onMouseLeave={() => props.isBeingHovered(false)}
                 style={{
-                    position: "absolute",
                     left: position.x,
                     top: position.y,
                     userSelect: "none",
