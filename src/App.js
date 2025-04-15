@@ -190,8 +190,8 @@ function App() {
   }
 
   return (
-    
     <div className="App" onClick={addNoteWithClick}>
+    <div className="BlurScreen"></div>
       <div className='AppContent'>
         <Navbar 
           navbarProcessUndoStack={processUndoStack}

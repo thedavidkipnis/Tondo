@@ -2,12 +2,21 @@
 body, html { 
   margin: 0;
   padding: 0;
+
+  /* blurs everything */
+  /* -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px); */
+  
   --main-color: rgb(30,31,38);
   --secondary-color: white;
   --accent-color: rgb(165, 165, 165); 
   --action-accent-color: rgb(234, 200, 117);
 
   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+  
 }
 
 button {
@@ -35,7 +44,7 @@ button {
   padding: 0 0 0 0;
 
   position: fixed;
-  z-index: 1000;
+  z-index: 500;
 }
 
 .NavbarLeftHalfButtons {
