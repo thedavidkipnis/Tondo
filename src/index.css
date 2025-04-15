@@ -30,8 +30,12 @@ button {
   align-items: center;
   justify-content: center;
   height: 6vh;
+  width: 100vw;
   min-height: 50px;
   padding: 0 0 0 0;
+
+  position: fixed;
+  z-index: 1000;
 }
 
 .NavbarLeftHalfButtons {
