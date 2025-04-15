@@ -1,6 +1,6 @@
 A React web application that acts as a board of sticky notes for writing down your ideas or todo's :) 
 
-![alt text](https://github.com/thedavidkipnis/Tondo/blob/master/image%20(14).png)
+![img missing :(](https://github.com/thedavidkipnis/Tondo/blob/master/tondo_sample.png)
 
 Link [here](https://thedavidkipnis.github.io/Tondo/)!
 
