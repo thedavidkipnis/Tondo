@@ -10,9 +10,4 @@ Currently works with local storage, so just go to the link and all notes should 
 
 ---
 
-This is a WIP! Future work:
-- Switch to Firebase for data storage and retreival + auth
-- Tabs (I.e. creating a new tab for a subset of notes to stay organized)
-- Note resizing
-- Themes and styles! (+ dark mode)
-- Mobile Support
+This is a WIP! Future work and dev plans are listed in the [Trello](https://trello.com/b/ytUZoF3P/tondo) board.
