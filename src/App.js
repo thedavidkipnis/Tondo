@@ -72,8 +72,8 @@ function App() {
     const newNote = <BoardNote
           key={newID} 
           noteId={newID} 
-          notePageX={pageX}
-          notePageY={pageY}
+          notePageX={pageX-75}
+          notePageY={pageY-15}
           noteText={noteText}
           placeHolderText={placeHolderTextSamples[Math.floor(Math.random()*placeHolderTextSamples.length)]}
           isBeingHovered={setIsHoveringNote}
