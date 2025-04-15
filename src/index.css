@@ -149,6 +149,10 @@ button {
 
 .InstructionText {
   color: var(--accent-color);
+
+  position: absolute;
+  top: 10vh;
+  left: 36%;
 }
 
 .MobileSupport {
