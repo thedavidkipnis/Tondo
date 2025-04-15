@@ -6,7 +6,7 @@ Authored: David Kipnis, 2024
 
 const InstructionText = (props) => {
     return (
-        <h1 className="InstructionText" hidden={props.toggle}>
+        <h1 className="InstructionText" style={{display: props.toggle ? 'none' : 'flex'}}>
             {props.text}
         </h1>
     );

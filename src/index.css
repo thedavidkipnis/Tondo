@@ -160,8 +160,11 @@ button {
   color: var(--accent-color);
 
   position: absolute;
-  top: 10vh;
-  left: 36%;
+  height: 90%;
+  width: 100%;
+
+  align-items: center;
+  justify-content: center;
 }
 
 .MobileSupport {
