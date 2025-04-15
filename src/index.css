@@ -2,7 +2,6 @@
 body, html { 
   margin: 0;
   padding: 0;
-
   --main-color: rgb(30,31,38);
   --secondary-color: white;
   --accent-color: rgb(165, 165, 165); 

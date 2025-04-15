@@ -25,6 +25,8 @@ function App() {
 
   const [isHoveringNavBar, setIsHoveringNavbar] = useState(false)
   const [isHoveringAnotherNote, setIsHoveringNote] = useState(false)
+  const [isNoteBeingDragged, setIsNoteBeingDragged] = useState(false)
+
   const [noteIDToDelete, setIDToBeDeleted] = useState(null)
 
   const [settingsWindowVisible, setSettingsVisibility] = useState(false)
@@ -38,6 +40,7 @@ function App() {
           notePageY={pageY}
           noteText={noteText}
           isBeingHovered={setIsHoveringNote}
+          isBeingDragged={setIsNoteBeingDragged}
           setIDToBeDeleted={setIDToBeDeleted}
           />
   }
@@ -74,6 +77,7 @@ function App() {
           noteText={noteText}
           placeHolderText={placeHolderTextSamples[Math.floor(Math.random()*placeHolderTextSamples.length)]}
           isBeingHovered={setIsHoveringNote}
+          isBeingDragged={setIsNoteBeingDragged}
           setIDToBeDeleted={setIDToBeDeleted}
           />
           
@@ -84,7 +88,7 @@ function App() {
 
   // used by navbar button to add note with a click
   const addNoteWithClick = ({pageX, pageY}) => {
-    if(!isHoveringAnotherNote && !isHoveringNavBar && !settingsWindowVisible) {
+    if(!isHoveringAnotherNote && !isNoteBeingDragged && !isHoveringNavBar && !settingsWindowVisible) {
       addNote(null, pageX, pageY, '');
     }
   }
