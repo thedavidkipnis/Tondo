@@ -4,11 +4,7 @@ A React web application that acts as a board of sticky notes for writing down id
 Authored: David Kipnis, 2024
 */
 
-import Navbar from './components/Navbar'
-import BoardNote from "./components/BoardNote"
-import Board from './components/Board'
-import SettingsWindow from './components/SettingsWindow'
-import MobileSupport from './components/MobileSupport'
+import { Navbar, BoardNote, Board, SettingsWindow, MobileSupport, LoginWindow } from './/components';
 import { useEffect, useState } from "react"
 import * as hp from "./helpers"
 
@@ -20,6 +16,8 @@ const undoStack = [];
 const placeHolderTextSamples = [':)','B^)',':0',':-)',':D','^_^',':3','O.o']
 
 function App() {
+
+  const [userLogIn, setUserLogIn] = useState(null)
 
   const [notes, setNotes] = useState([])
 
@@ -88,8 +86,9 @@ function App() {
 
   // used by navbar button to add note with a click
   const addNoteWithClick = ({pageX, pageY}) => {
-    if(!isHoveringAnotherNote && !isNoteBeingDragged && !isHoveringNavBar && !settingsWindowVisible) {
+    if(userLogIn != null && !isHoveringAnotherNote && !isNoteBeingDragged && !isHoveringNavBar && !settingsWindowVisible) {
       addNote(null, pageX, pageY, '');
+      console.log(userLogIn);
     }
   }
 
@@ -191,9 +190,10 @@ function App() {
 
   return (
     <div className="App" onClick={addNoteWithClick}>
-    <div className="BlurScreen"></div>
+    <LoginWindow buttonFunction={setUserLogIn} needLogIn={userLogIn != null}/>
+    <div className="BlurScreen" style={userLogIn ? {filter:'blur(0px)'} : {}}>
       <div className='AppContent'>
-        <Navbar 
+        <Navbar
           navbarProcessUndoStack={processUndoStack}
           navbarUndoStack={undoStack}
           navbarAddNote={() => addNote(null, windowCenterX + hp.getRandomIntInRange(-200,200),windowCenterY + hp.getRandomIntInRange(-200,200))} 
@@ -205,6 +205,7 @@ function App() {
         <Board notes={notes}/>
 
         <SettingsWindow isVisible={settingsWindowVisible} toggleVisible = {toggleSettingsVisible}/>
+      </div>
       </div>
       <MobileSupport />
     </div>
