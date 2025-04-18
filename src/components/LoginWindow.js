@@ -9,9 +9,9 @@ const LoginWindow = (props) => {
         return (
             <div className="LoginWindowContainer">
                 <div className="LoginWindow" key='loginwindow'>
-                    <label>username:</label>
+                    <label className="LoginWindowLabel">username:</label>
                     <input className="LoginWindowTextBox" id="loginwindowusername"></input>
-                    <label>password:</label>
+                    <label className="LoginWindowLabel">password:</label>
                     <input className="LoginWindowTextBox" id="loginwindowpassword" type='password'></input>
                     <LoginWindowButton buttonFunction={props.buttonFunction} buttonText='Log In'/>
                 </div>

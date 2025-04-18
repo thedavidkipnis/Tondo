@@ -2,6 +2,8 @@
 body, html { 
   margin: 0;
   padding: 0;
+
+  background-color: var(--main-color);
   
   --main-color: rgb(30,31,38);
   --secondary-color: white;
@@ -50,7 +52,11 @@ button {
   height: 25vh;
   width: 25vw;
 
-  border-radius: 5px;
+  padding: 15px;
+
+  border-radius: 10px;
+  border-color: var(--secondary-color);
+  border-style: solid;
   color: var(--secondary-color);
   background-color: var(--main-color);
 
@@ -62,13 +68,20 @@ button {
   z-index: 800;
 }
 
+.LoginWindowLabel {
+  font-family: inherit;
+  font-size: inherit;
+}
+
 .LoginWindowTextBox {
-  margin-bottom: 15px;
+  margin-bottom: min(10px);
 }
 
 .AppContent {
   width: 100%;
   height: 100vh;
+
+  transition: background-color 0.2s;
 }
 
 .Navbar {
@@ -195,7 +208,7 @@ button {
 }
 
 .InstructionText {
-  color: var(--accent-color);
+  color: var(--main-color);
 
   position: absolute;
   height: 90%;
@@ -212,6 +225,10 @@ button {
 @media (max-width: 768px), (orientation: landscape) and (max-height: 500px) {
   .AppContent {
     display: none; /* Hide on mobile */
+  }
+
+  .LoginWindowContainer {
+    display: none;
   }
 
   .MobileSupport {

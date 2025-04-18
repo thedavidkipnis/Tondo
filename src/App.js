@@ -17,7 +17,7 @@ const placeHolderTextSamples = [':)','B^)',':0',':-)',':D','^_^',':3','O.o']
 
 function App() {
 
-  const [userLogIn, setUserLogIn] = useState(null)
+  const [userLogIn, setUserLogIn] = useState('temp') // set back to NULL when developing further
 
   const [notes, setNotes] = useState([])
 
@@ -192,7 +192,7 @@ function App() {
     <div className="App" onClick={addNoteWithClick}>
     <LoginWindow buttonFunction={setUserLogIn} needLogIn={userLogIn != null}/>
     <div className="BlurScreen" style={userLogIn ? {filter:'blur(0px)'} : {}}>
-      <div className='AppContent'>
+      <div className='AppContent' style={userLogIn ? {backgroundColor:'white'} : {}}>
         <Navbar
           navbarProcessUndoStack={processUndoStack}
           navbarUndoStack={undoStack}
