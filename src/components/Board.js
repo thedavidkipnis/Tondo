@@ -4,7 +4,7 @@ Board component that renders all notes
 Authored: David Kipnis, 2024
 */
 
-import InstructionText from "./InstructionText";
+import '../styles/Board.css'
 
 const Board = (props) => {
     return ( 
@@ -15,6 +15,14 @@ const Board = (props) => {
             </div>
         </div>
      );
+}
+
+const InstructionText = (props) => {
+    return (
+        <h1 className="InstructionText" style={{opacity: props.toggle ? 0 : 1}}>
+            {props.text}
+        </h1>
+    );
 }
 
 export default Board;

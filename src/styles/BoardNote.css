@@ -1,0 +1,43 @@
+/* Board Note css styling */
+/* Authored: David Kipnis, 2025 */
+
+.BoardNote {
+    text-align: center;
+    vertical-align: middle;
+    align-items: center;
+    background-color: var(--main-color);
+    border-radius: 5px 0px 5px 5px;
+    border: 2px;
+    border-style: solid;
+    border-color: var(--secondary-color);
+    width: 150px;
+    height: 100px;
+    position: absolute;
+    padding: 0 0 0 0;
+  }
+  
+  .BoardNoteCloseMarkerContainer {
+    display: flex;
+  }
+  
+  .BoardNoteCloseMarker {
+    cursor: pointer;
+    color: white;
+    text-align: right;
+    right: 0;
+    width: 10px;
+  
+    font-family: monospace;
+    font-size: 120%;
+  }
+  
+  .BoardNoteTextBox {
+    width: 80%;
+    margin: 0 0 0 0;
+    height: 70%;
+    resize: none;
+    background: none;
+    border: none;
+    outline: none;
+    color: white;
+  }

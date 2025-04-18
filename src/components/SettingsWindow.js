@@ -4,6 +4,8 @@ Component for representing settings window
 Authored: David Kipnis, 2024
 */
 
+import '../styles/SettingsWindow.css'
+
 const SettingsWindow = (props) => {
 
     return (

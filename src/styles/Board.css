@@ -1,0 +1,23 @@
+/* Board css styling */
+/* Authored: David Kipnis, 2025 */
+
+.Board {
+    align-items: center;
+    align-content: center;
+    text-align: center;
+  }
+  
+  .InstructionText {
+    color: var(--main-color);
+  
+    position: absolute;
+    height: 90%;
+    width: 100%;
+
+    display: flex;
+  
+    align-items: center;
+    justify-content: center;
+
+    transition: opacity 0.2s;
+  }

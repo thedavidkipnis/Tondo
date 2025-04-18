@@ -4,6 +4,8 @@ Login Window component that renders login window
 Authored: David Kipnis, 2025
 */
 
+import '../styles/LoginWindow.css'
+
 const LoginWindow = (props) => {
     if (!props.needLogIn) {
         return (
@@ -24,7 +26,7 @@ const LoginWindow = (props) => {
 const LoginWindowButton = (props) => {
 
     return (
-        <button className="NavbarButton" onClick={() => props.buttonFunction('TEST LOG INxxx')}>
+        <button className="LoginWindowButton" onClick={() => props.buttonFunction('TEST LOG INxxx')}>
             {props.buttonText}
         </button>
     )

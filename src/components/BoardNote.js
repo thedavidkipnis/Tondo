@@ -5,6 +5,7 @@ Authored: David Kipnis, 2024
 */
 
 import { useState, useEffect, useRef } from "react"
+import '../styles/BoardNote.css'
 
 const BoardNote = (props) => {
 

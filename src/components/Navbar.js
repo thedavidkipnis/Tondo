@@ -4,6 +4,8 @@ Navbar component that contains buttons for interacting with the application
 Authored: David Kipnis, 2024
 */
 
+import '../styles/Navbar.css'
+
 const Navbar = (props) => {
 
     return ( 

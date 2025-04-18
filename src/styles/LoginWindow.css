@@ -1,0 +1,76 @@
+/* Login Window css styling */
+/* Authored: David Kipnis, 2025 */
+
+.LoginWindowContainer {
+    height: 100vh;
+    width: 100vw;
+  
+    position: absolute;
+  
+    align-items: center;
+    justify-content: center;
+  
+    display: flex;
+  }
+  
+  .LoginWindow {
+    height: 25vh;
+    width: 25vw;
+  
+    padding: 15px;
+  
+    border-radius: 10px;
+    border-color: var(--secondary-color);
+    border-style: solid;
+    color: var(--secondary-color);
+    background-color: var(--main-color);
+  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  
+    z-index: 800;
+  }
+  
+  .LoginWindowLabel {
+    font-family: inherit;
+    font-size: inherit;
+  }
+  
+  .LoginWindowTextBox {
+    margin-bottom: min(10px);
+  }
+
+  .LoginWindowButton {
+    color: var(--secondary-color);
+    background-color: var(--main-color);
+    border-color: var(--secondary-color);
+    height: 40px;
+    width: 100px;
+    border-style: solid;
+    margin: 5px 5px 5px 5px;
+    border-radius: 5px;
+  
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+    cursor: pointer;
+  
+    outline: none;
+  
+    transition: .2s;
+  }
+  
+  .LoginWindowButton:hover {
+    background-color: var(--secondary-color);
+    color: var(--main-color);
+    transition: .2s;
+  }
+  
+  .LoginWindowButton:active {
+    color: var(--main-color);
+    background-color: var(--action-accent-color);
+    border-color: var(--action-accent-color);
+    transition: .05s;
+  }

@@ -1,0 +1,68 @@
+/* Navbar css styling */
+/* Authored: David Kipnis, 2025 */
+
+.Navbar {
+    display: flex;
+    background-color: var(--main-color);
+    align-items: center;
+    justify-content: center;
+    height: 6vh;
+    width: 100vw;
+    min-height: 50px;
+    padding: 0 0 0 0;
+  
+    position: fixed;
+    z-index: 500;
+  }
+  
+  .NavbarLeftHalfButtons {
+    /* border-color: greenyellow;
+    border-style: solid; */
+    height: 100%;
+    width: 50%;
+    text-align: left;
+  }
+  
+  .NavbarRightHalfButtons {
+    /* border-color: red;
+    border-style: solid; */
+    height: 100%;
+    width: 50%;
+    text-align: right;
+    align-content: center;
+  
+    padding-right: 1vw;
+  }
+  
+  .NavbarButton {
+    color: var(--secondary-color);
+    background-color: var(--main-color);
+    border-color: var(--secondary-color);
+    height: 40px;
+    width: 100px;
+    border-style: solid;
+    margin: 5px 5px 5px 5px;
+    border-radius: 5px;
+  
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+    cursor: pointer;
+  
+    outline: none;
+  
+    transition: .2s;
+  }
+  
+  .NavbarButton:hover {
+    background-color: var(--secondary-color);
+    color: var(--main-color);
+    transition: .2s;
+  }
+  
+  .NavbarButton:active {
+    color: var(--main-color);
+    background-color: var(--action-accent-color);
+    border-color: var(--action-accent-color);
+    transition: .05s;
+  }
