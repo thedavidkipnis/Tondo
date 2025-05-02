@@ -17,7 +17,7 @@ const placeHolderTextSamples = [':)','B^)',':0',':-)',':D','^_^',':3','O.o']
 
 function App() {
 
-  const [userLogIn, setUserLogIn] = useState('temp') // set back to NULL when developing further
+  const [userLogIn, setUserLogIn] = useState(null) // set back to NULL when developing further
 
   const [notes, setNotes] = useState([])
 
@@ -28,6 +28,16 @@ function App() {
   const [noteIDToDelete, setIDToBeDeleted] = useState(null)
 
   const [settingsWindowVisible, setSettingsVisibility] = useState(false)
+
+  // POTENTIAL SOLUTION TO THE BACKGROUND COLOR STAYING BLACK AFTER LOG IN
+  // useEffect(() => {
+  //   if(userLogIn === null) {
+  //     document.body.style.backgroundColor = 'rgb(' + 30 + ',' + 31 + ',' + 38 + ')';
+  //   } else {
+  //     document.body.style.backgroundColor = 'white';
+  //     document.body.style.transition = 'background-color 3s';
+  //   }
+  // }, [userLogIn])
 
   // creates a BoardNote component
   const createNoteFromLocalStorage = (noteID, pageX, pageY, noteText) => {
