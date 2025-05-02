@@ -9,7 +9,9 @@ import '../styles/Navbar.css'
 const Navbar = (props) => {
 
     return ( 
-        <nav className="Navbar" onMouseEnter={() => props.isBeingHovered(true)} onMouseLeave={() => props.isBeingHovered(false)}>
+        <nav className="Navbar" style={props.isUserLoggedIn ? {} : {display:'none'}}
+            onMouseEnter={() => props.isBeingHovered(true)} 
+            onMouseLeave={() => props.isBeingHovered(false)}>
             <div className="NavbarLeftHalfButtons">
                 {/* <NavbarButton buttonText={"Settings"} buttonFunction={props.toggleSettingsVisible}/> */}
             </div>

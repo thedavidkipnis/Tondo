@@ -194,6 +194,7 @@ function App() {
     <div className="BlurScreen" style={userLogIn ? {filter:'blur(0px)'} : {}}>
       <div className='AppContent' style={userLogIn ? {backgroundColor:'white'} : {}}>
         <Navbar
+          isUserLoggedIn={userLogIn}
           navbarProcessUndoStack={processUndoStack}
           navbarUndoStack={undoStack}
           navbarAddNote={() => addNote(null, windowCenterX + hp.getRandomIntInRange(-200,200),windowCenterY + hp.getRandomIntInRange(-200,200))} 
