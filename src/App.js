@@ -17,7 +17,7 @@ const placeHolderTextSamples = [':)','B^)',':0',':-)',':D','^_^',':3','O.o']
 
 function App() {
 
-  const [userLogIn, setUserLogIn] = useState(null) // set back to NULL when developing further
+  const [userLogIn, setUserLogIn] = useState('temp') // set back to NULL when developing further
 
   const [notes, setNotes] = useState([])
 
