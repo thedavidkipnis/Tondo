@@ -17,7 +17,7 @@ const placeHolderTextSamples = [':)','B^)',':0',':-)',':D','^_^',':3','O.o']
 
 function App() {
 
-  const [userLogIn, setUserLogIn] = useState('temp') // set back to NULL when developing further
+  const [userLogIn, setUserLogIn] = useState(null) // set back to NULL when developing further
 
   const [notes, setNotes] = useState([])
 
@@ -91,7 +91,6 @@ function App() {
           
     setNotes([...notes, newNote]);
     localStorage.setItem(newID, [pageX, pageY, noteText]);
-    
   }
 
   // used by navbar button to add note with a click
@@ -200,9 +199,9 @@ function App() {
 
   return (
     <div className="App" onClick={addNoteWithClick}>
-    <LoginWindow buttonFunction={setUserLogIn} needLogIn={userLogIn != null}/>
+    <LoginWindow setUser={setUserLogIn} needLogIn={userLogIn != null}/>
     <div className="BlurScreen" style={userLogIn ? {filter:'blur(0px)'} : {}}>
-      <div className='AppContent' style={userLogIn ? {backgroundColor:'white'} : {}}>
+      <div className='AppContent' style={userLogIn ? {backgroundColor:'white'} : {display:'none'}}>
         <Navbar
           isUserLoggedIn={userLogIn}
           navbarProcessUndoStack={processUndoStack}
