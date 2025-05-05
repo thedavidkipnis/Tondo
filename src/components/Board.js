@@ -10,7 +10,7 @@ const Board = (props) => {
     return ( 
         <div>
             <div className="Board" key='board'>
-                <InstructionText key = 'instructions' text={"Click to add note..."} toggle={props.notes.length}/>
+                <InstructionText key = 'instructions' text={"Click to add note..."} toggle={props.notes.length} isWaitingForNotes={props.isWaitingForNotes}/>
                 {props.notes.map(note => (note))}
             </div>
         </div>
@@ -19,9 +19,14 @@ const Board = (props) => {
 
 const InstructionText = (props) => {
     return (
-        <h1 className="InstructionText" style={{opacity: props.toggle ? 0 : 1}}>
-            {props.text}
-        </h1>
+        <div>
+            <h1 className="InstructionText" style={{opacity: props.toggle ? 0 : 1, display: props.isWaitingForNotes ? 'none' : 'flex'}}>
+                {props.text}
+            </h1>
+            <div className='WaitingSpinnerContainer'>
+                <div className='WaitingSpinner' style={{display: props.isWaitingForNotes ? 'flex' : 'none'}}></div>
+            </div>
+        </div>
     );
 }
 

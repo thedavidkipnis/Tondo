@@ -21,3 +21,34 @@
 
     transition: opacity 0.2s;
   }
+
+  .WaitingSpinnerContainer {
+    position: absolute;
+    height: 90%;
+    width: 100%;
+
+    display: flex;
+  
+    align-items: center;
+    justify-content: center;
+  }
+
+  .WaitingSpinner {
+    width: 40px;
+    height: 40px;
+    background: var(--secondary-color);
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 5px;
+    border-color: var(--main-color);
+    animation: spin 2.5s linear infinite;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }

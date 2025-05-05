@@ -6,6 +6,8 @@ Authored: David Kipnis, 2024
 
 import { Navbar, BoardNote, Board, SettingsWindow, MobileSupport, LoginWindow } from './/components';
 import { useEffect, useState } from "react"
+import { firestore } from './Firebase'
+import { collection, getDocs } from 'firebase/firestore'
 import * as hp from "./helpers"
 
 const windowCenterX = (window.innerWidth/2) - 75;
@@ -20,6 +22,7 @@ function App() {
   const [userLogIn, setUserLogIn] = useState(null) // set back to NULL when developing further
 
   const [notes, setNotes] = useState([])
+  const [waitingForNoteFetch, setWaitingForNoteFetch] = useState(false)
 
   const [isHoveringNavBar, setIsHoveringNavbar] = useState(false)
   const [isHoveringAnotherNote, setIsHoveringNote] = useState(false)
@@ -40,7 +43,7 @@ function App() {
   // }, [userLogIn])
 
   // creates a BoardNote component
-  const createNoteFromLocalStorage = (noteID, pageX, pageY, noteText) => {
+  const createNoteFromParameters = (noteID, pageX, pageY, noteText) => {
     return <BoardNote 
           key={noteID}
           noteId={noteID} 
@@ -53,21 +56,46 @@ function App() {
           />
   }
 
-  // populates notes from what is found in localStorage
+  // loading notes from Firestore
   useEffect(() => {
-    var toAdd = [];
-    if(localStorage.length > 0) {
-      Object.keys(localStorage).forEach((key) => {
-        const note = localStorage.getItem(key);
+    const fetchUserDataFromFirestore = async () => {
+      try {
+        setWaitingForNoteFetch(true);
+        const userData = await getDocs(collection(firestore, userLogIn.email));
         
-        let noteData = hp.processLocalStorageEntry(note)
-
-        const newNote = createNoteFromLocalStorage(key, noteData[0], noteData[1], noteData[2]);
-        toAdd.push(newNote);
-      })
-      setNotes(toAdd);
+        var toAdd = [];
+        userData.forEach((doc) => {
+          const newNote = createNoteFromParameters(doc.id, doc.data()['notePageX'], doc.data()['notePageY'], doc.data()['noteText']);
+          toAdd.push(newNote);
+        })
+        setWaitingForNoteFetch(false);
+        setNotes(toAdd);
+      }
+      catch (e) {
+        console.error('Error fetching user data:', e);
+      }
     }
-  }, [])
+    if(userLogIn) {
+      fetchUserDataFromFirestore(); 
+    }
+  },[userLogIn])
+
+  // populates notes from what is found in localStorage
+  // useEffect(() => {
+    
+  //   var toAdd = [];
+  //   if(localStorage.length > 0) {
+  //     Object.keys(localStorage).forEach((key) => {
+  //       const note = localStorage.getItem(key);
+        
+  //       let noteData = hp.processLocalStorageEntry(note)
+
+  //       const newNote = createNoteFromLocalStorage(key, noteData[0], noteData[1], noteData[2]);
+  //       toAdd.push(newNote);
+  //     })
+  //     setNotes(toAdd);
+  //   }
+  // }, [])
 
   // adds note to the current note list and updates local storage
   const addNote = (noteID, pageX, pageY, noteText) => {
@@ -97,7 +125,6 @@ function App() {
   const addNoteWithClick = ({pageX, pageY}) => {
     if(userLogIn != null && !isHoveringAnotherNote && !isNoteBeingDragged && !isHoveringNavBar && !settingsWindowVisible) {
       addNote(null, pageX, pageY, '');
-      console.log(userLogIn);
     }
   }
 
@@ -177,7 +204,7 @@ function App() {
           
           let noteData = hp.processLocalStorageEntry(note.substring(ptr, note.length)) // get X, Y, note text
 
-          let newNote = createNoteFromLocalStorage(noteID, noteData[0], noteData[1], noteData[2]);
+          let newNote = createNoteFromParameters(noteID, noteData[0], noteData[1], noteData[2]);
           toAdd.push(newNote);
 
           stackElement = undoStack.pop()
@@ -212,7 +239,7 @@ function App() {
           toggleSettingsVisible={toggleSettingsVisible}
           areSettingsVisible={settingsWindowVisible}/>
 
-        <Board notes={notes}/>
+        <Board notes={notes} isWaitingForNotes={waitingForNoteFetch}/>
 
         <SettingsWindow isVisible={settingsWindowVisible} toggleVisible = {toggleSettingsVisible}/>
       </div>
