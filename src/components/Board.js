@@ -23,8 +23,9 @@ const InstructionText = (props) => {
             <h1 className="InstructionText" style={{opacity: props.toggle ? 0 : 1, display: props.isWaitingForNotes ? 'none' : 'flex'}}>
                 {props.text}
             </h1>
-            <div className='WaitingSpinnerContainer'>
-                <div className='WaitingSpinner' style={{display: props.isWaitingForNotes ? 'flex' : 'none'}}></div>
+            <div className='WaitingSpinnerContainer' style={{display: props.isWaitingForNotes ? 'flex' : 'none'}}>
+                <div className='WaitingSpinner'></div>
+                <label className='WaitingSpinnerLabel'>Loading your notes...</label>
             </div>
         </div>
     );

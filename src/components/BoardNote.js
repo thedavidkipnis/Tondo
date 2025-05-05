@@ -72,6 +72,13 @@ const BoardNote = (props) => {
         localStorage.setItem(props.noteId, [position.x, position.y, noteText]);
     }, [noteText])
 
+    
+    const clearEmptyNote = () => {
+        if(noteText.length < 1) {
+            props.setIDToBeDeleted(id);
+        }
+    }
+
     return (
         <div className="BoardNote" ref={noteRef} key={props.noteId}
                 onMouseDown={handleMouseDown}
@@ -97,6 +104,7 @@ const BoardNote = (props) => {
                 value = {noteText} 
                 onChange={handleInputChange}
                 type="text" 
+                // onBlur={() => clearEmptyNote()}
                 className="BoardNoteTextBox" 
                 placeholder={props.placeHolderText}
                 autoFocus 

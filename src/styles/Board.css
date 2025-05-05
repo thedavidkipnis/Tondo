@@ -2,53 +2,60 @@
 /* Authored: David Kipnis, 2025 */
 
 .Board {
-    align-items: center;
-    align-content: center;
-    text-align: center;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+}
+
+.InstructionText {
+  color: var(--main-color);
+
+  position: absolute;
+  height: 90%;
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  transition: opacity 0.2s;
+}
+
+.WaitingSpinnerContainer {
+  position: absolute;
+  height: 90%;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.WaitingSpinner {
+  width: 40px;
+  height: 40px;
+  background: var(--secondary-color);
+  border-style: solid;
+  border-width: 3px;
+  border-radius: 5px;
+  border-color: var(--main-color);
+  animation: spin 2.5s linear infinite;
+
+  margin-bottom: 15px;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
   }
-  
-  .InstructionText {
-    color: var(--main-color);
-  
-    position: absolute;
-    height: 90%;
-    width: 100%;
-
-    display: flex;
-  
-    align-items: center;
-    justify-content: center;
-
-    transition: opacity 0.2s;
+  to {
+    transform: rotate(360deg);
   }
+}
 
-  .WaitingSpinnerContainer {
-    position: absolute;
-    height: 90%;
-    width: 100%;
-
-    display: flex;
-  
-    align-items: center;
-    justify-content: center;
-  }
-
-  .WaitingSpinner {
-    width: 40px;
-    height: 40px;
-    background: var(--secondary-color);
-    border-style: solid;
-    border-width: 3px;
-    border-radius: 5px;
-    border-color: var(--main-color);
-    animation: spin 2.5s linear infinite;
-  }
-
-  @keyframes spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
+.WaitingSpinnerLabel {
+  font-family: inherit;
+  font-size: 80%;
+}

@@ -233,7 +233,6 @@ function App() {
           isUserLoggedIn={userLogIn}
           navbarProcessUndoStack={processUndoStack}
           navbarUndoStack={undoStack}
-          navbarAddNote={() => addNote(null, windowCenterX + hp.getRandomIntInRange(-200,200),windowCenterY + hp.getRandomIntInRange(-200,200))} 
           navbarClearAll={clearAllNotes} 
           isBeingHovered={setIsHoveringNavbar}
           toggleSettingsVisible={toggleSettingsVisible}

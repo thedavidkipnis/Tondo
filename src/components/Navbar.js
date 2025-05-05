@@ -18,7 +18,6 @@ const Navbar = (props) => {
             <div className="NavbarRightHalfButtons">
                 <NavbarButton buttonText={"Undo"} buttonFunction={props.navbarProcessUndoStack} isVisible={props.navbarUndoStack.length > 0}/>
                 <NavbarButton buttonText={"Clear All"} buttonFunction={props.navbarClearAll} isVisible={true}/>
-                <NavbarButton buttonText={"New Note"} buttonFunction={props.navbarAddNote} isVisible={true}/>
             </div>
         </nav>
      );
