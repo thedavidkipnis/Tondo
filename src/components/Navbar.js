@@ -13,7 +13,8 @@ const Navbar = (props) => {
             onMouseEnter={() => props.isBeingHovered(true)} 
             onMouseLeave={() => props.isBeingHovered(false)}>
             <div className="NavbarLeftHalfButtons">
-                {/* <NavbarButton buttonText={"Settings"} buttonFunction={props.toggleSettingsVisible}/> */}
+                {/* <NavbarButton buttonText={"Settings"} buttonFunction={props.toggleSettingsVisible} isVisible={true}/> */}
+                <NavbarButton buttonText={"Save"} buttonFunction={null} isVisible={true}/>
             </div>
             <div className="NavbarRightHalfButtons">
                 <NavbarButton buttonText={"Undo"} buttonFunction={props.navbarProcessUndoStack} isVisible={props.navbarUndoStack.length > 0}/>

@@ -6,7 +6,7 @@ Authored: David Kipnis, 2025
 
 import '../styles/LoginWindow.css'
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../Firebase";
 
@@ -45,6 +45,18 @@ const LoginWindow = (props) => {
     
       };
 
+    // allows 'enter' to be hit instead of the Login button - but needs to be tweaked
+    //   useEffect(() => {
+    //     const handleKeyDown = (e) => {
+    //       if (e.key === 'Enter') {
+    //         handleLogin(props.setUser, inputEmail, inputPass);
+    //       }
+    //     };
+    
+    //     window.addEventListener('keydown', handleKeyDown);
+    //     return () => window.removeEventListener('keydown', handleKeyDown);
+    //   }, []);
+
     if (!props.needLogIn) {
         return (
             <div className="LoginWindowContainer">
@@ -75,6 +87,7 @@ const LoginWindow = (props) => {
 }
 
 const LoginWindowButton = (props) => {
+
     return (
         <button className="LoginWindowButton" onClick={props.LogInFunction} 
                 style={props.awaitingLogin ? {display:'none'} : {}}>
