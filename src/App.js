@@ -54,6 +54,7 @@ function App() {
   }
 
   // populates notes from what is found in localStorage
+  // also, moves notes around if window is too small
   useEffect(() => {
     var toAdd = [];
     if(localStorage.length > 0) {
@@ -61,6 +62,14 @@ function App() {
         const note = localStorage.getItem(key);
         
         let noteData = hp.processLocalStorageEntry(note)
+
+        // update noteData to be within window size
+        if(Number(noteData[0]) + 150 > window.innerWidth) {
+          noteData[0] = window.innerWidth - 151;
+        }
+        if(Number(noteData[1]) + 100 > window.innerHeight) {
+          noteData[1] = window.innerHeight - 101;
+        }
 
         const newNote = createNoteFromLocalStorage(key, noteData[0], noteData[1], noteData[2]);
         toAdd.push(newNote);
@@ -98,7 +107,6 @@ function App() {
   const addNoteWithClick = ({pageX, pageY}) => {
     if(userLogIn != null && !isHoveringAnotherNote && !isNoteBeingDragged && !isHoveringNavBar && !settingsWindowVisible) {
       addNote(null, pageX, pageY, '');
-      console.log(userLogIn);
     }
   }
 
@@ -115,7 +123,6 @@ function App() {
         setNotes(new_arr)
         setIsHoveringNote(false)
         setIDToBeDeleted(null)
-
         break
       }
     }

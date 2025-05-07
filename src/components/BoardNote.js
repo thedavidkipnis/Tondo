@@ -15,9 +15,44 @@ const BoardNote = (props) => {
     const [noteCloseMarkerIcon, setNoteCloseMarkerIcon] = useState('●')
 
     const [position, setPosition] = useState({
-        x: Number(props.notePageX) || 100,
-        y: Number(props.notePageY) || 100,
+        x: Number(props.notePageX),
+        y: Number(props.notePageY)
       });
+
+    // used for dynamically resizing windows - might need to be moved up to App
+    // useEffect(() => {
+
+    //     const handleWindowResize = () => {
+
+    //         // if(position['x'] + 150 > window.innerWidth && position['y'] + 100 > window.innerHeight) {
+    //         //     setPosition({
+    //         //         x: window.innerWidth - 150,
+    //         //         y: window.innerHeight - 100
+    //         //     });
+    //         // }
+    //         let v = localStorage.getItem(props.noteId);
+    //         if(Number(v['x']) + 150 > window.innerWidth) {
+    //             setPosition({
+    //                 x: window.innerWidth - 151,
+    //                 y: position.y
+    //             });
+    //         }
+    //         // if(position['y'] + 100 > window.innerHeight) {
+    //         //     console.log('too big y');
+    //         //     setPosition({
+    //         //         x: position['x'],
+    //         //         y: window.innerHeight - 100
+    //         //     });
+    //         // }
+    //     }
+
+    //     window.addEventListener('resize', handleWindowResize);
+    //     return () => { 
+    //         window.removeEventListener('resize', handleWindowResize);
+    //         localStorage.setItem(props.noteId, [position.x, position.y, noteText])
+    //     }
+    // }, [])
+
 
     // refs used for calculating note position and drag state
     const noteRef = useRef(null);   // references the note
@@ -68,7 +103,7 @@ const BoardNote = (props) => {
         setNoteText(event.target.value)
       }
 
-      useEffect(() => {
+    useEffect(() => {
         localStorage.setItem(props.noteId, [position.x, position.y, noteText]);
     }, [noteText])
 
