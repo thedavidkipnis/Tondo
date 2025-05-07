@@ -65,10 +65,10 @@ function App() {
 
         // update noteData to be within window size
         if(Number(noteData[0]) + 150 > window.innerWidth) {
-          noteData[0] = window.innerWidth - 151;
+          noteData[0] = window.innerWidth - 155;
         }
         if(Number(noteData[1]) + 100 > window.innerHeight) {
-          noteData[1] = window.innerHeight - 101;
+          noteData[1] = window.innerHeight - 105;
         }
 
         const newNote = createNoteFromLocalStorage(key, noteData[0], noteData[1], noteData[2]);
