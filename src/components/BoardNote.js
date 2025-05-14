@@ -20,38 +20,38 @@ const BoardNote = (props) => {
       });
 
     // used for dynamically resizing windows - might need to be moved up to App
-    // useEffect(() => {
+    useEffect(() => {
 
-    //     const handleWindowResize = () => {
+        const handleWindowResize = () => {
 
-    //         // if(position['x'] + 150 > window.innerWidth && position['y'] + 100 > window.innerHeight) {
-    //         //     setPosition({
-    //         //         x: window.innerWidth - 150,
-    //         //         y: window.innerHeight - 100
-    //         //     });
-    //         // }
-    //         let v = localStorage.getItem(props.noteId);
-    //         if(Number(v['x']) + 150 > window.innerWidth) {
-    //             setPosition({
-    //                 x: window.innerWidth - 151,
-    //                 y: position.y
-    //             });
-    //         }
-    //         // if(position['y'] + 100 > window.innerHeight) {
-    //         //     console.log('too big y');
-    //         //     setPosition({
-    //         //         x: position['x'],
-    //         //         y: window.innerHeight - 100
-    //         //     });
-    //         // }
-    //     }
+            // if(position['x'] + 150 > window.innerWidth && position['y'] + 100 > window.innerHeight) {
+            //     setPosition({
+            //         x: window.innerWidth - 150,
+            //         y: window.innerHeight - 100
+            //     });
+            // }
+            // if(position.x + 150 > window.innerWidth) {
+            //     setPosition({
+            //         x: window.innerWidth - 155,
+            //         y: position.y
+            //     });
+            //     localStorage.setItem(props.noteId, [window.innerWidth - 155, position.y, noteText])
 
-    //     window.addEventListener('resize', handleWindowResize);
-    //     return () => { 
-    //         window.removeEventListener('resize', handleWindowResize);
-    //         localStorage.setItem(props.noteId, [position.x, position.y, noteText])
-    //     }
-    // }, [])
+            // }
+            // if(position['y'] + 100 > window.innerHeight) {
+            //     console.log('too big y');
+            //     setPosition({
+            //         x: position['x'],
+            //         y: window.innerHeight - 100
+            //     });
+            // }
+        }
+
+        window.addEventListener('resize', handleWindowResize);
+        return () => { 
+            window.removeEventListener('resize', handleWindowResize);
+        }
+    }, [])
 
 
     // refs used for calculating note position and drag state
