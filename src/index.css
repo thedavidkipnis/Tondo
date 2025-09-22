@@ -48,6 +48,8 @@ button {
 
 .MobileSupport {
   display: none;
+  background-color: black;
+  color: white;
 }
 
 @media (max-width: 768px), (orientation: landscape) and (max-height: 500px) {
