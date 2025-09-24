@@ -10,4 +10,10 @@ Currently works with local storage, so just go to the link and all notes should 
 
 ---
 
-This is a WIP! Future work and dev plans are listed in the [Trello](https://trello.com/b/ytUZoF3P/tondo) board.
+This is a WIP! Future work includes:
+- Firebase for note storage and retrieval
+- Tabs
+- Note resizing
+- Themes / styles
+- Multiple note selection
+- Mobile support
